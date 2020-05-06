@@ -52,16 +52,20 @@ def down_button_callback(channel):
         lower_boat()
     elif(STATE == State.LIFTING or STATE == State.LOWERING):
         abort()
-        
-def lower_boat():
-    open_rear_valves()
-    sleep(35)
-    open_front_valves()
+
+def turn_off_blower():
+    GPIO.output(BLOWER, True)
     
-    GPIO.output(FRONT_VALVE_POWER, False)
-    GPIO.output(FRONT_VALVES, False)
-    sleep(10)
-    print("UP")
+def turn_on_blower():
+    GPIO.output(BLOWER, False)
+    
+def open_master_valve():
+    GPIO.output(MASTER_VALVE, False)
+    sleep(5)
+    
+def close_master_valve():
+    GPIO.output(MASTER_VALVE, True)
+    sleep(5)
 
 def open_rear_valves():
     GPIO.output(REAR_VALVE_POWER, False)
@@ -74,17 +78,39 @@ def open_front_valves():
     GPIO.output(FRONT_VALVES, False)
     sleep(3)
     GPIO.output(FRONT_VALVE_POWER, True)
+    
+def close_rear_valves():
+    GPIO.output(REAR_VALVE_POWER, False)
+    GPIO.output(REAR_VALVES, True)
+    sleep(3)
+    GPIO.output(REAR_VALVE_POWER, True)
+    
+def close_front_valves():
+    GPIO.output(FRONT_VALVE_POWER, False)
+    GPIO.output(FRONT_VALVES, True)
+    sleep(3)
+    GPIO.output(FRONT_VALVE_POWER, True)
+
+def lower_boat():
+    turn_off_blower()
+    open_master_valve()
+    open_rear_valves()
+    sleep(35)
+    open_front_valves()
+    sleep(35)
 
 def lift_boat():
-    GPIO.output(4, False)
-    GPIO.output(5, False)
-    GPIO.output(6, False)
-    GPIO.output(12, False)
-    GPIO.output(13, False)
-    GPIO.output(16, False)
-    GPIO.output(19, False)
-    GPIO.output(20, False)
-    print("UP")
+    close_master_valve()
+    open_front_valves()
+    turn_on_blower()
+    sleep(20)
+    open_rear_valves()
+    sleep(15)
+    close_front_valves()
+    sleep(25)
+    close_rear_valves()
+    turn_off_blower()
+    
     
 def abort():
     STATE = State.ABORT
