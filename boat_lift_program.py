@@ -3,6 +3,10 @@ from time import sleep
 import RPi_I2C_driver
 import signal
 from enum import Enum
+from threading import Event
+
+exit = Event()
+
 GPIO.setwarnings(False)
 
 SMALL_VALVE_TIMING = 4
@@ -53,16 +57,12 @@ GPIO.setup(BUTTONS, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 status_lcd = RPi_I2C_driver.lcd()
 
 def up_button_callback(channel):
-    print("Up Pushed")
-    print(state)
     if(state != State.LIFTING and state != State.UP):
         lift_boat()
     elif(state == State.LIFTING or state == State.LOWERING):
         abort()
     
 def down_button_callback(channel):
-    print("Down Pushed")
-    print(state)
     if(state != State.LOWERING and state != State.DOWN):
         lower_boat()
     elif(state == State.LIFTING or state == State.LOWERING):
@@ -70,11 +70,11 @@ def down_button_callback(channel):
 
 def turn_off_blower():
     #GPIO.output(BLOWER, True)
-    set_secondary_status("BLOWER: OFF")
+    set_secondary_status("BLOWER: OFF     ")
     
 def turn_on_blower():
     #GPIO.output(BLOWER, False)
-    set_secondary_status("BLOWER: ON")
+    set_secondary_status("BLOWER: ON      ")
     
 def open_master_valve():
     GPIO.output(MASTER_VALVE, False)
@@ -126,7 +126,7 @@ def lower_boat():
     global state
     status_lcd.backlight(1)
     state = State.LOWERING
-    set_primary_status("-   LOWERING   -")
+    set_primary_status("--- LOWERING ---")
     turn_off_blower()
     open_master_valve()
     open_rear_valves()
@@ -135,14 +135,17 @@ def lower_boat():
     sleep(LOWER_FRONT_WAIT)
     state = State.DOWN
     status_lcd.lcd_clear()
-    set_primary_status("-  BOAT  DOWN  -")
+    set_primary_status("-- BOAT  DOWN --")
     set_secondary_status("       :)       ")
+    sleep(10)
+    if(state == State.DOWN):
+        status_lcd.backlight(0)
 
 def lift_boat():
     global state
     status_lcd.backlight(1)
     state = State.LIFTING
-    set_primary_status("-   LIFTING    -")
+    set_primary_status("--- LIFTING ----")
     close_master_valve()
     open_front_valves()
     turn_on_blower()
@@ -155,22 +158,38 @@ def lift_boat():
     turn_off_blower()
     state = State.UP
     status_lcd.lcd_clear()
-    set_primary_status("-   BOAT  UP   -")
+    set_primary_status("--- BOAT  UP ---")
     set_secondary_status("       :)       ")
+    sleep(10)
+    if(state == State.UP):
+        status_lcd.backlight(0) 
     
     
 def abort():
     state = State.ABORT
 
-status_lcd.backlight(0)
+def main():
+    while not exit.is_set():
+        sleep(20)
 
-GPIO.output(VALVE_POWER, False)
-GPIO.output(ALL_VALVES + [MASTER_VALVE], True)
-sleep(SMALL_VALVE_TIMING)
-GPIO.output(VALVE_POWER, True)
+def quit(signo, _frame):
+    print("Interrupted by %d, shutting down" % signo)
+    GPIO.cleanup()
+    exit.set()
+
+if __name__ == '__main__':
     
-GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
-GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
-
-message = input("Press enter to quit\n\n") # Run until someone presses enter
-GPIO.cleanup()
+    for sig in ('TERM', 'HUP', 'INT'):
+        signal.signal(getattr(signal, 'SIG'+sig), quit);
+    
+    status_lcd.backlight(0)
+    
+    GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
+    GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
+    
+    GPIO.output(VALVE_POWER, False)
+    GPIO.output(ALL_VALVES + [MASTER_VALVE], True)
+    sleep(SMALL_VALVE_TIMING)
+    GPIO.output(VALVE_POWER, True)
+    
+    main()
