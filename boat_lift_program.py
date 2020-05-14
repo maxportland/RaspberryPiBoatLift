@@ -70,11 +70,11 @@ def down_button_callback(channel):
 
 def turn_off_blower():
     #GPIO.output(BLOWER, True)
-    set_secondary_status("BLOWER: ON")
+    set_secondary_status("BLOWER: OFF")
     
 def turn_on_blower():
     #GPIO.output(BLOWER, False)
-    set_secondary_status("BLOWER: OFF")
+    set_secondary_status("BLOWER: ON")
     
 def open_master_valve():
     GPIO.output(MASTER_VALVE, False)
@@ -123,6 +123,8 @@ def set_secondary_status(status_text):
     status_lcd.lcd_display_string(status_text, 2)
 
 def lower_boat():
+    global state
+    status_lcd.backlight(1)
     state = State.LOWERING
     set_primary_status("-   LOWERING   -")
     turn_off_blower()
@@ -132,10 +134,13 @@ def lower_boat():
     open_front_valves()
     sleep(LOWER_FRONT_WAIT)
     state = State.DOWN
+    status_lcd.lcd_clear()
     set_primary_status("-  BOAT  DOWN  -")
-    set_secondary_status(":)")
+    set_secondary_status("       :)       ")
 
 def lift_boat():
+    global state
+    status_lcd.backlight(1)
     state = State.LIFTING
     set_primary_status("-   LIFTING    -")
     close_master_valve()
@@ -149,12 +154,15 @@ def lift_boat():
     close_rear_valves()
     turn_off_blower()
     state = State.UP
+    status_lcd.lcd_clear()
     set_primary_status("-   BOAT  UP   -")
-    set_secondary_status(":)")
+    set_secondary_status("       :)       ")
     
     
 def abort():
     state = State.ABORT
+
+status_lcd.backlight(0)
 
 GPIO.output(VALVE_POWER, False)
 GPIO.output(ALL_VALVES + [MASTER_VALVE], True)
