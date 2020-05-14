@@ -44,7 +44,7 @@ VALVE_POWER = [FRONT_VALVE_POWER, REAR_VALVE_POWER]
 ALL_VALVES = FRONT_VALVES + REAR_VALVES
 BUTTONS = [UP_BUTTON, DOWN_BUTTON]
 
-STATE = State.DOWN
+state = State.DOWN
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(ALL_VALVES + VALVE_POWER + [BLOWER, MASTER_VALVE], GPIO.OUT, initial=GPIO.HIGH)
@@ -54,25 +54,27 @@ status_lcd = RPi_I2C_driver.lcd()
 
 def up_button_callback(channel):
     print("Up Pushed")
-    if(STATE != State.LIFTING and STATE != State.UP):
+    print(state)
+    if(state != State.LIFTING and state != State.UP):
         lift_boat()
-    elif(STATE == State.LIFTING or STATE == State.LOWERING):
+    elif(state == State.LIFTING or state == State.LOWERING):
         abort()
     
 def down_button_callback(channel):
     print("Down Pushed")
-    if(STATE != State.LOWERING and STATE != State.DOWN):
+    print(state)
+    if(state != State.LOWERING and state != State.DOWN):
         lower_boat()
-    elif(STATE == State.LIFTING or STATE == State.LOWERING):
+    elif(state == State.LIFTING or state == State.LOWERING):
         abort()
 
 def turn_off_blower():
     #GPIO.output(BLOWER, True)
-    set_secondary_status("NO BLOW!")
+    set_secondary_status("BLOWER: ON")
     
 def turn_on_blower():
     #GPIO.output(BLOWER, False)
-    set_secondary_status("BLOW!")
+    set_secondary_status("BLOWER: OFF")
     
 def open_master_valve():
     GPIO.output(MASTER_VALVE, False)
@@ -87,7 +89,7 @@ def close_master_valve():
 def open_rear_valves():
     GPIO.output(REAR_VALVE_POWER, False)
     GPIO.output(REAR_VALVES, False)
-    set_secondary_status("FRNT VALVES:OPEN")
+    set_secondary_status("REAR VALVES:OPEN")
     sleep(SMALL_VALVE_TIMING)
     GPIO.output(REAR_VALVE_POWER, True)
     
@@ -152,15 +154,15 @@ def lift_boat():
     
     
 def abort():
-    STATE = State.ABORT
+    state = State.ABORT
 
 GPIO.output(VALVE_POWER, False)
 GPIO.output(ALL_VALVES + [MASTER_VALVE], True)
 sleep(SMALL_VALVE_TIMING)
 GPIO.output(VALVE_POWER, True)
     
-GPIO.add_event_detect(17, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
-GPIO.add_event_detect(18, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
+GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
+GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
 
 message = input("Press enter to quit\n\n") # Run until someone presses enter
 GPIO.cleanup()
