@@ -4,8 +4,9 @@ import RPi_I2C_driver
 import signal
 from enum import Enum
 from threading import Event
+from flask import Flask, render_template
 
-exit = Event()
+app = Flask(__name__)
 
 GPIO.setwarnings(False)
 
@@ -56,24 +57,24 @@ GPIO.setup(BUTTONS, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 status_lcd = RPi_I2C_driver.lcd()
 
-def up_button_callback(channel):
+def up_button_callback():
     if(state != State.LIFTING and state != State.UP):
         lift_boat()
     elif(state == State.LIFTING or state == State.LOWERING):
         abort()
     
-def down_button_callback(channel):
+def down_button_callback():
     if(state != State.LOWERING and state != State.DOWN):
         lower_boat()
     elif(state == State.LIFTING or state == State.LOWERING):
         abort()
 
 def turn_off_blower():
-    #GPIO.output(BLOWER, True)
+    GPIO.output(BLOWER, True)
     set_secondary_status("BLOWER: OFF     ")
     
 def turn_on_blower():
-    #GPIO.output(BLOWER, False)
+    GPIO.output(BLOWER, False)
     set_secondary_status("BLOWER: ON      ")
     
 def open_master_valve():
@@ -163,19 +164,70 @@ def lift_boat():
     sleep(10)
     if(state == State.UP):
         status_lcd.backlight(0) 
-    
-    
+     
 def abort():
     state = State.ABORT
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/down", methods = ['POST'])
+def webDownPush():
+    up_button_callback()
+    return "accepted"
+ 
+@app.route("/up", methods = ['POST'])
+def webUpPush():
+    down_button_callback()
+    return "accepted"
+
+@app.route("/frontValvesOpen", methods = ['POST'])
+def webFrontValvesOpen():
+    open_front_valves()
+    return "accepted"
+
+@app.route("/frontValvesClose", methods = ['POST'])
+def webFrontValvesClose():
+    close_front_valves()
+    return "accepted"
+
+@app.route("/rearValvesOpen", methods = ['POST'])
+def webRearValvesOpen():
+    open_rear_valves()
+    return "accepted"
+
+@app.route("/rearValvesClose", methods = ['POST'])
+def webRearValvesClose():
+    close_rear_valves()
+    return "accepted"
+
+@app.route("/masterValveOpen", methods = ['POST'])
+def webMasterValveOpen():
+    open_master_valve()
+    return "accepted"
+
+@app.route("/masterValveClose", methods = ['POST'])
+def webMasterValveClose():
+    close_master_valve()
+    return "accepted"
+
+@app.route("/blowerOn", methods = ['POST'])
+def webBlowerOn():
+    turn_on_blower()
+    return "accepted"
+
+@app.route("/blowerOff", methods = ['POST'])
+def webBlowerOff():
+    turn_off_blower()
+    return "accepted"
+
 def main():
-    while not exit.is_set():
-        sleep(20)
+    app.run(debug=True, threaded=True, host="0.0.0.0", port="80")
 
 def quit(signo, _frame):
     print("Interrupted by %d, shutting down" % signo)
     GPIO.cleanup()
-    exit.set()
 
 if __name__ == '__main__':
     

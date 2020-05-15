@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'OpenSansExtraBold';
+  src: url('fonts/OpenSans-ExtraBold.ttf')  format('truetype');
+}
+.app-title {
+	font-family:"OpenSansExtraBold";
+}
+.btn-group-lg>.btn.boat-lift-button,
+.btn-lg.boat-lift-button {
+	border-radius:0;
+	background-color:#000000;
+	color:white;
+	width:120px;
+	font-family:"OpenSansExtraBold";
+	font-size:22px;
+}
+
+.btn.boat-lift-button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-group-lg>.btn.small-boat-lift-button, 
+.btn-lg.small-boat-lift-button {
+	border-radius:0;
+	background-color:#000000;
+	color:white;
+	font-family:"OpenSansExtraBold";
+	border:none;
+	width:130px;
+}
+.btn.small-boat-lift-button:hover {
+    color: white;
+    text-decoration: none;
+}

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" ng-app="liftApp">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<title>Boat Lift</title>
+    </head>
+    <body>
+	<div class="container" ng-controller="boatLiftController">
+	    <br/><br/>
+	    <div class="jumbotron">
+		<div class="col-md-4 text-center"> 
+		    <h1 class="app-title">BOAT LIFT</h1>
+		</div>
+		<div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" style="font-size:26px;" ng-click="upPushed()" role="button">UP</button></div>
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" style="font-size:26px;" ng-click="downPushed()" role="button">DOWN</button></div>
+		</div>
+		<br/>
+		<div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesOpen()" role="button">REAR OPEN</button></div>
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesClose()" role="button">REAR CLOSE</button></div>
+		</div>
+		<div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesOpen()" role="button">FRONT OPEN</button></div>
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesClose()" role="button">FRONT CLOSE</button></div>
+		</div>
+		<div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveOpen()" role="button">M-VLVE OPEN</button></div>
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveClose()" role="button">M-VLVE CLOSE</button></div>
+		</div>
+		<div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOn()" role="button">BLOWER ON</button></div>
+		  <div class="p-2 bd-highlight col-example"><button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOff()" role="button">BLOWER OFF</button></div>
+		</div>
+	    </div>
+	</div>
+	<script src="{{ url_for('static', filename='jquery-3.5.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='angular.min.js') }}"></script>
+	<script>
+	    
+	    var app = angular.module('liftApp', []);
+	    app.controller('boatLiftController', function($scope, $http) {
+		$scope.upPushed = function() {
+		    $http({
+			url: '/up',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.downPushed = function() {
+		    $http({
+			url: '/down',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.frontValvesOpen = function() {
+		    $http({
+			url: '/frontValvesOpen',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.frontValvesClose = function() {
+		    $http({
+			url: '/frontValvesClose',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.rearValvesOpen = function() {
+		    $http({
+			url: '/rearValvesOpen',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.rearValvesClose = function() {
+		    $http({
+			url: '/rearValvesClose',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.masterValveOpen = function() {
+		    $http({
+			url: '/masterValveOpen',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.masterValveClose = function() {
+		    $http({
+			url: '/masterValveClose',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.blowerOn = function() {
+		    $http({
+			url: '/blowerOn',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+		$scope.blowerOff = function() {
+		    $http({
+			url: '/blowerOff',
+			method: "POST",
+			data: {},
+			headers: {'Content-Type': 'application/json'}
+		    }).then(function (result) {
+			
+		    });
+		};
+	    });
+	</script>
+    </body>
+</html>
