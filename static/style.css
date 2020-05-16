@@ -33,3 +33,5 @@
     color: white;
     text-decoration: none;
 }
+
+.ng-cloak { display: none !important; }
