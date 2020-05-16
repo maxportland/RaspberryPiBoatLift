@@ -9,6 +9,13 @@ GPIO.setup(ALL_VALVES + VALVE_POWER + [BLOWER, MASTER_VALVE], GPIO.OUT, initial=
 GPIO.setup(BUTTONS, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
+def loop_pause(seconds):
+    for i in range(seconds):
+        if state_object["lift_state"] == LiftState.ABORT:
+            return
+        sleep(1)
+
+
 def turn_off_blower():
     GPIO.output(BLOWER, True)
     state_object["blower_state"] = BlowerState.OFF

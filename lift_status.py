@@ -8,15 +8,19 @@ state_object = {
     "blower_state": BlowerState.OFF,
     "master_valve_state": ValveState.CLOSED,
     "rear_valve_state": ValveState.CLOSED,
-    "front_valve_state": ValveState.CLOSED
+    "front_valve_state": ValveState.CLOSED,
+    "current_countdown": 0,
+    "messages": []
 }
 
 
-def set_primary_status(status_text):
+def set_primary_status(short_status_text, status_text):
     print(status_text)
-    status_lcd.lcd_display_string(status_text, 1)
+    state_object["messages"].append(status_text)
+    status_lcd.lcd_display_string(short_status_text, 1)
 
 
-def set_secondary_status(status_text):
+def set_secondary_status(short_status_text, status_text):
     print(status_text)
-    status_lcd.lcd_display_string(status_text, 2)
+    state_object["messages"].append(status_text)
+    status_lcd.lcd_display_string(short_status_text, 2)
