@@ -73,13 +73,10 @@
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "off"'>
                 <img src="{{ url_for('static', filename='power_off.png') }}" ng-click="blowerOn()"/>
+                <div class="text-center button-label">BLOWER</div>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "on"'>
                 <img src="{{ url_for('static', filename='power_on.png') }}" ng-click="blowerOff()"/>
-            </div>
-        </div>
-        <div>
-            <div class="p-2 bd-highlight col-example" ng-show='status.blower_state != ""'>
                 <div class="text-center button-label">BLOWER</div>
             </div>
         </div>
