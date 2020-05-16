@@ -1,8 +1,7 @@
 var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http, $timeout) {
-    $scope.$watch('$viewContentLoaded', function()
-        {
-            $timeout(function() {
+    var init = function () {
+    $timeout(function() {
             alert("Hello!");
             $http({
                 url: '/status',
@@ -12,7 +11,8 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
 
             });
         },0);
-        });
+    };
+    init();
     $scope.upPushed = function() {
         $http({
             url: '/up',
