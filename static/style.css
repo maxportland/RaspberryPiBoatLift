@@ -5,6 +5,13 @@
 .h2, .app-title {
 	font-family:"OpenSansExtraBold";
 }
+
+.button-label {
+    color:#818181;
+    font-family:"OpenSansExtraBold";
+	font-size:14px;
+}
+
 .btn-group-lg>.btn.boat-lift-button,
 .btn-lg.boat-lift-button {
 	border-radius:0;
