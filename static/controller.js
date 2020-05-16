@@ -16,6 +16,17 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             }).then(function (result) {
                 $scope.status = result.data;
             });
+            $(".switch-slide").animateSprite({
+                fps: 3,
+                animations: {
+                    walkRight: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    walkLeft: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+                },
+                loop: false,
+                complete: function(){
+
+                }
+            });
          }, 0);
     };
     init();
@@ -80,6 +91,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         });
     };
     $scope.masterValveOpen = function() {
+        $(".switch-slide").animateSprite('play', 'walkRight');
         $http({
             url: '/masterValveOpen',
             method: "POST",

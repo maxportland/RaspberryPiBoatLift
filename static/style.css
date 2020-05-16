@@ -47,3 +47,9 @@
 }
 
 .ng-cloak { display: none !important; }
+
+.switch-slide {
+    height: 56px;
+    width: 30px;
+    background-image: url(switch_sprite2.png);
+}
