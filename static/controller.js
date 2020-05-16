@@ -1,5 +1,14 @@
 var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http) {
+    $scope.init = function() {
+        $http({
+        url: '/status',
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+        }).then(function (result) {
+
+        });
+    };
     $scope.upPushed = function() {
         $http({
         url: '/up',
