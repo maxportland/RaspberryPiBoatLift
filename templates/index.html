@@ -59,15 +59,17 @@
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.master_valve_state == "closed"'>
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveOpen()"
-                        role="button">OPEN MASTER VALVE
-                </button>
+            <div class="p-2 bd-highlight col-example text-center ng-cloak" ng-show='status.master_valve_state == "closed"'>
+                <img src="{{ url_for('static', filename='indicator_off.png') }}" ng-click="masterValveOpen()"/>
+                <br/>
+                <img src="{{ url_for('static', filename='switch_down.png') }}" ng-click="masterValveOpen()"/>
+                <div class="button-label">MASTER VALVE</div>
             </div>
-            <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.master_valve_state == "open"'>
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveClose()"
-                        role="button">CLOSE MASTER VALVE
-                </button>
+            <div class="p-2 bd-highlight col-example text-center ng-cloak" ng-show='status.master_valve_state == "open"'>
+                <img src="{{ url_for('static', filename='indicator_on.png') }}" ng-click="masterValveClose()"/>
+                <br/>
+                <img src="{{ url_for('static', filename='switch_on.png') }}" ng-click="masterValveClose()"/>
+                <div class="button-label">MASTER VALVE</div>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
