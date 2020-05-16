@@ -1,5 +1,5 @@
 var app = angular.module('liftApp', []);
-app.controller('boatLiftController', function($scope, $http) {
+app.controller('boatLiftController', function($scope, $http, $timeout) {
     $scope.$on('$viewContentLoaded', function() {
         $timeout(function() {
             $http({
