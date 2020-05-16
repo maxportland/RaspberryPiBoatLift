@@ -14,13 +14,13 @@ state_object = {
 }
 
 
-def set_primary_status(short_status_text, status_text):
+def set_primary_status(lcd_status_text, status_text):
     print(status_text)
     state_object["messages"].append(status_text)
-    status_lcd.lcd_display_string(short_status_text, 1)
+    status_lcd.lcd_display_string(lcd_status_text, 1)
 
 
-def set_secondary_status(short_status_text, status_text):
+def set_secondary_status(lcd_status_text, status_text):
     print(status_text)
     state_object["messages"].append(status_text)
-    status_lcd.lcd_display_string(short_status_text, 2)
+    status_lcd.lcd_display_string(lcd_status_text, 2)

@@ -38,27 +38,27 @@ def down_button_callback():
 def lower_sequence_started():
     state_object["lift_state"] = LiftState.LOWERING
     status_lcd.backlight(1)
-    set_primary_status("--- LOWERING ---")
+    set_primary_status("--- LOWERING ---", "Lowering")
 
 
 def lower_sequence_ended():
     state_object["lift_state"] = LiftState.DOWN
     status_lcd.lcd_clear()
-    set_primary_status("-- BOAT  DOWN --")
-    set_secondary_status("       :)       ")
+    set_primary_status("-- BOAT  DOWN --", "Boat Down")
+    set_secondary_status("       :)       ", "")
 
 
 def lift_sequence_started():
     state_object["lift_state"] = LiftState.LIFTING
     status_lcd.backlight(1)
-    set_primary_status("--- LIFTING ----")
+    set_primary_status("--- LIFTING ----", "Lifting")
 
 
 def lift_sequence_ended():
     state_object["lift_state"] = LiftState.UP
     status_lcd.lcd_clear()
-    set_primary_status("--- BOAT  UP ---")
-    set_secondary_status("       :)       ")
+    set_primary_status("--- BOAT  UP ---", "Boat Up")
+    set_secondary_status("       :)       ", "")
 
 
 def lower_rear_pause():

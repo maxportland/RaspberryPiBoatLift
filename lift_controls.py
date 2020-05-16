@@ -19,33 +19,33 @@ def loop_pause(seconds):
 def turn_off_blower():
     GPIO.output(BLOWER, True)
     state_object["blower_state"] = BlowerState.OFF
-    set_secondary_status("BLOWER: OFF     ")
+    set_secondary_status("BLOWER: OFF     ", "Blower Off")
 
 
 def turn_on_blower():
     GPIO.output(BLOWER, False)
     state_object["blower_state"] = BlowerState.ON
-    set_secondary_status("BLOWER: ON      ")
+    set_secondary_status("BLOWER: ON      ", "Blower On")
 
 
 def open_master_valve():
     GPIO.output(MASTER_VALVE, False)
     state_object["master_valve_state"] = ValveState.OPEN
-    set_secondary_status("MSTR VALVE: OPEN")
+    set_secondary_status("MSTR VALVE: OPEN", "Master Valve Open")
     sleep(LARGE_VALVE_TIMING)
 
 
 def close_master_valve():
     GPIO.output(MASTER_VALVE, True)
     state_object["master_valve_state"] = ValveState.CLOSED
-    set_secondary_status("MSTR VALVE: CLSE")
+    set_secondary_status("MSTR VALVE: CLSE", "Master Valve Closed")
     sleep(LARGE_VALVE_TIMING)
 
 
 def open_rear_valves():
     GPIO.output(REAR_VALVE_POWER, False)
     GPIO.output(REAR_VALVES, False)
-    set_secondary_status("REAR VALVES:OPEN")
+    set_secondary_status("REAR VALVES:OPEN", "Rear Valves Opened")
     sleep(SMALL_VALVE_TIMING)
     GPIO.output(REAR_VALVE_POWER, True)
     state_object["rear_valve_state"] = ValveState.OPEN
@@ -54,7 +54,7 @@ def open_rear_valves():
 def close_rear_valves():
     GPIO.output(REAR_VALVE_POWER, False)
     GPIO.output(REAR_VALVES, True)
-    set_secondary_status("REAR VALVES:CLSE")
+    set_secondary_status("REAR VALVES:CLSE", "Rear Valves Closed")
     sleep(SMALL_VALVE_TIMING)
     GPIO.output(REAR_VALVE_POWER, True)
     state_object["rear_valve_state"] = ValveState.CLOSED
@@ -63,7 +63,7 @@ def close_rear_valves():
 def open_front_valves():
     GPIO.output(FRONT_VALVE_POWER, False)
     GPIO.output(FRONT_VALVES, False)
-    set_secondary_status("FRNT VALVES:OPEN")
+    set_secondary_status("FRNT VALVES:OPEN", "Front Valves Opened")
     sleep(4)
     GPIO.output(FRONT_VALVE_POWER, True)
     state_object["front_valve_state"] = ValveState.OPEN
@@ -72,7 +72,7 @@ def open_front_valves():
 def close_front_valves():
     GPIO.output(FRONT_VALVE_POWER, False)
     GPIO.output(FRONT_VALVES, True)
-    set_secondary_status("FRNT VALVES:CLSE")
+    set_secondary_status("FRNT VALVES:CLSE", "Front Valves Closed")
     sleep(SMALL_VALVE_TIMING)
     GPIO.output(FRONT_VALVE_POWER, True)
     state_object["front_valve_state"] = ValveState.CLOSED
