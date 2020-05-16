@@ -34,48 +34,47 @@
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.rear_valve_state == "closed"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesOpen()" role="button">
-                    REAR OPEN
+                    OPEN REAR VALVES
                 </button>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.rear_valve_state == "open"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesClose()"
-                        role="button">REAR CLOSE
+                        role="button">CLOSE REAR VALVES
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.front_valve_state == "closed"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesOpen()"
-                        role="button">FRONT OPEN
+                        role="button">OPEN FRONT VALVES
                 </button>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.front_valve_state == "open"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesClose()"
-                        role="button">FRONT CLOSE
+                        role="button">CLOSE FRONT VALVES
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.master_valve_state == "closed"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveOpen()"
-                        role="button">M-VLVE OPEN
+                        role="button">OPEN MASTER VALVES
                 </button>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.master_valve_state == "open"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveClose()"
-                        role="button">M-VLVE CLOSE
+                        role="button">CLOSE MASTER VALVES
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "off"'>
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOn()" role="button">BLOWER
-                    ON
+                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOn()" role="button">TURN ON BLOWER
                 </button>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "on"'>
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOff()" role="button">
-                    BLOWER OFF
+                    TURN OFF BLOWER
                 </button>
             </div>
         </div>
