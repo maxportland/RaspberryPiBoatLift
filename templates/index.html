@@ -72,13 +72,10 @@
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "off"'>
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOn()" role="button">TURN ON BLOWER
-                </button>
+                <img src="{{ url_for('static', filename='power_off.png') }}" ng-click="blowerOn()"/>
             </div>
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "on"'>
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOff()" role="button">
-                    TURN OFF BLOWER
-                </button>
+                <img src="{{ url_for('static', filename='power_on.png') }}" ng-click="blowerOff()"/>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
