@@ -77,8 +77,9 @@
             <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.blower_state == "on"'>
                 <img src="{{ url_for('static', filename='power_on.png') }}" ng-click="blowerOff()"/>
             </div>
-            <br/>
-            <h2 class="app-title text-center" style="color:#818181;">BLOWER</h2>
+            <div class="p-2 bd-highlight col-example" ng-show='status.blower_state != ""'>
+                <h2 class="text-center" style="color:#818181;">BLOWER</h2>
+            </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example">

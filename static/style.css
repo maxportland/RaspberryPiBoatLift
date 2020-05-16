@@ -2,7 +2,7 @@
   font-family: 'OpenSansExtraBold';
   src: url('fonts/OpenSans-ExtraBold.ttf')  format('truetype');
 }
-.app-title {
+.h2, .app-title {
 	font-family:"OpenSansExtraBold";
 }
 .btn-group-lg>.btn.boat-lift-button,
