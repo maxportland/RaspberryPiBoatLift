@@ -1,19 +1,19 @@
 from enum import Enum
 
 
-class LiftState(Enum):
-    UP = 1
-    DOWN = 2
-    LOWERING = 3
-    LIFTING = 4
-    ABORT = 5
+class LiftState(str, Enum):
+    UP = "up"
+    DOWN = "down"
+    LOWERING = "lowering"
+    LIFTING = "lifting"
+    ABORT = "abort"
 
 
-class ValveState(Enum):
-    OPEN = 1
-    CLOSED = 2
+class ValveState(str, Enum):
+    OPEN = "open"
+    CLOSED = "closed"
 
 
-class BlowerState(Enum):
-    ON = 1
-    OFF = 2
+class BlowerState(str, Enum):
+    ON = "on"
+    OFF = "off"
