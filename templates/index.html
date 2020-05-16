@@ -47,8 +47,6 @@
                 <img src="{{ url_for('static', filename='switch_up.png') }}" ng-click="rearValvesClose()"/>
                 <div class="button-label">REAR VALVES</div>
             </div>
-        </div>
-        <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 bd-highlight col-example text-center ng-cloak" ng-show='status.front_valve_state == "closed"'>
                 <img src="{{ url_for('static', filename='indicator_off.png') }}" ng-click="frontValvesOpen()"/>
                 <br/>
@@ -88,13 +86,6 @@
                 <br/>
                 <img src="{{ url_for('static', filename='power_on.png') }}" ng-click="blowerOff()"/>
                 <div class="button-label">BLOWER</div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example">
-                <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="init()" role="button">
-                    REFRESH
-                </button>
             </div>
         </div>
     </div>
