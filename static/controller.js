@@ -1,6 +1,6 @@
 var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http) {
-    $scope.init = function() {
+    $scope.$on('$viewContentLoaded', function() {
         $http({
         url: '/status',
         method: "GET",
@@ -8,7 +8,7 @@ app.controller('boatLiftController', function($scope, $http) {
         }).then(function (result) {
 
         });
-    };
+    });
     $scope.upPushed = function() {
         $http({
         url: '/up',

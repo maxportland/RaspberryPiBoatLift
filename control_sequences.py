@@ -4,16 +4,16 @@ import RPi.GPIO as GPIO
 
 
 def close_all_valves():
-    GPIO.output(VALVE_POWER, False)
-    GPIO.output(ALL_VALVES + [MASTER_VALVE], True)
-    sleep(SMALL_VALVE_TIMING)
-    GPIO.output(VALVE_POWER, True)
+    close_master_valve()
+    close_rear_valves()
+    close_front_valves()
 
 
 def init_sequence():
     status_lcd.backlight(0)
     GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
     GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
+    turn_off_blower()
     close_all_valves()
 
 
