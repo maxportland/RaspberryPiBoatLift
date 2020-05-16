@@ -1,15 +1,16 @@
 var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http, $timeout) {
+
     var init = function () {
-    $timeout(function() {
+        $timeout(function() {
             $http({
                 url: '/status',
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                console.log(result.data);
+                $scope.status = result.data;
             });
-        },0);
+         }, 0);
     };
     init();
     $scope.upPushed = function() {
@@ -19,7 +20,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.downPushed = function() {
@@ -29,7 +30,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.frontValvesOpen = function() {
@@ -39,7 +40,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.frontValvesClose = function() {
@@ -49,7 +50,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.rearValvesOpen = function() {
@@ -59,7 +60,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.rearValvesClose = function() {
@@ -69,7 +70,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.masterValveOpen = function() {
@@ -79,7 +80,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.masterValveClose = function() {
@@ -89,7 +90,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.blowerOn = function() {
@@ -99,7 +100,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
     $scope.blowerOff = function() {
@@ -109,7 +110,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             data: {},
             headers: {'Content-Type': 'application/json'}
         }).then(function (result) {
-
+            $scope.status = result.data;
         });
     };
 });

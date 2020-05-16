@@ -1,4 +1,3 @@
-import lift_status
 from lift_controls import *
 import RPi.GPIO as GPIO
 
@@ -18,45 +17,45 @@ def init_sequence():
 
 
 def lift_is_in_sequence():
-    return (lift_status.state_object["lift_state"] == LiftState.LIFTING or
-            lift_status.state_object["lift_state"] == LiftState.LOWERING)
+    return (state_object["lift_state"] == LiftState.LIFTING or
+            state_object["lift_state"] == LiftState.LOWERING)
 
 
 def up_button_callback():
     if lift_is_in_sequence():
         abort()
-    elif lift_status.state_object["lift_state"] != LiftState.UP:
+    elif state_object["lift_state"] != LiftState.UP:
         lift_boat()
 
 
 def down_button_callback():
     if lift_is_in_sequence():
         abort()
-    elif lift_status.state_object["lift_state"] != LiftState.DOWN:
+    elif state_object["lift_state"] != LiftState.DOWN:
         lower_boat()
 
 
 def lower_sequence_started():
-    lift_status.state_object["lift_state"] = LiftState.LOWERING
+    state_object["lift_state"] = LiftState.LOWERING
     status_lcd.backlight(1)
     set_primary_status("--- LOWERING ---")
 
 
 def lower_sequence_ended():
-    lift_status.state_object["lift_state"] = LiftState.DOWN
+    state_object["lift_state"] = LiftState.DOWN
     status_lcd.lcd_clear()
     set_primary_status("-- BOAT  DOWN --")
     set_secondary_status("       :)       ")
 
 
 def lift_sequence_started():
-    lift_status.state_object["lift_state"] = LiftState.LIFTING
+    state_object["lift_state"] = LiftState.LIFTING
     status_lcd.backlight(1)
     set_primary_status("--- LIFTING ----")
 
 
 def lift_sequence_ended():
-    lift_status.state_object["lift_state"] = LiftState.UP
+    state_object["lift_state"] = LiftState.UP
     status_lcd.lcd_clear()
     set_primary_status("--- BOAT  UP ---")
     set_secondary_status("       :)       ")
@@ -100,14 +99,12 @@ def lift_boat():
 
 def run_sequence(sequence):
     for sequence_function in sequence:
-        if lift_status.state_object["lift_state"] == LiftState.ABORT:
+        if state_object["lift_state"] == LiftState.ABORT:
             return
         sequence_function()
 
 
 def abort():
-    lift_status.state_object["lift_state"] = LiftState.ABORT
-    close_rear_valves()
-    close_rear_valves()
-    close_master_valve()
+    state_object["lift_state"] = LiftState.ABORT
+    close_all_valves()
     turn_off_blower()

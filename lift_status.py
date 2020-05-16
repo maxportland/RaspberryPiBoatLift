@@ -7,8 +7,8 @@ state_object = {
     "lift_state": LiftState.UP,
     "blower_state": BlowerState.OFF,
     "master_valve_state": ValveState.CLOSED,
-    "rear_valves": ValveState.CLOSED,
-    "front_valves": ValveState.CLOSED
+    "rear_valve_state": ValveState.CLOSED,
+    "front_valve_state": ValveState.CLOSED
 }
 
 
