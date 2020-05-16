@@ -7,7 +7,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-
+                console.log(result);
             });
         },0);
     };
