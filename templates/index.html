@@ -19,12 +19,12 @@
     <div class="jumbotron">
         <h1 class="app-title text-center">BOAT LIFT</h1>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example" ng-show="status.lift_state == 'down'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.lift_state == 'down'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" style="font-size:26px;"
                         ng-click="upPushed()" role="button">UP
                 </button>
             </div>
-            <div class="p-2 bd-highlight col-example" ng-show="status.lift_state == 'up'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.lift_state == 'up'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" style="font-size:26px;"
                         ng-click="downPushed()" role="button">DOWN
                 </button>
@@ -32,43 +32,43 @@
         </div>
         <br/>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example" ng-show="status.rear_valve_state == 'closed'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.rear_valve_state == 'closed'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesOpen()" role="button">
                     REAR OPEN
                 </button>
             </div>
-            <div class="p-2 bd-highlight col-example" ng-show="status.rear_valve_state == 'open'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.rear_valve_state == 'open'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="rearValvesClose()"
                         role="button">REAR CLOSE
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example" ng-show="status.front_valve_state == 'closed'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.front_valve_state == 'closed'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesOpen()"
                         role="button">FRONT OPEN
                 </button>
             </div>
-            <div class="p-2 bd-highlight col-example" ng-show="status.front_valve_state == 'open'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.front_valve_state == 'open'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="frontValvesClose()"
                         role="button">FRONT CLOSE
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example" ng-show="status.master_valve_state == 'closed'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.master_valve_state == 'closed'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveOpen()"
                         role="button">M-VLVE OPEN
                 </button>
             </div>
-            <div class="p-2 bd-highlight col-example" ng-show="status.master_valve_state == 'open'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.master_valve_state == 'open'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="masterValveClose()"
                         role="button">M-VLVE CLOSE
                 </button>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example" ng-show="status.blower_state == 'off'">
+            <div class="p-2 bd-highlight col-example" ng-hide="status.blower_state == 'off'">
                 <button class="btn btn-lg btn-default small-boat-lift-button" ng-click="blowerOn()" role="button">BLOWER
                     ON
                 </button>
