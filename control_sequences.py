@@ -18,21 +18,21 @@ def init_sequence():
 
 
 def lift_is_in_sequence():
-    return (lift_status.state_object["lift_status"] == LiftState.LIFTING or
-            lift_status.state_object["lift_status"] == LiftState.LOWERING)
+    return (lift_status.state_object["lift_state"] == LiftState.LIFTING or
+            lift_status.state_object["lift_state"] == LiftState.LOWERING)
 
 
 def up_button_callback():
     if lift_is_in_sequence():
         abort()
-    elif lift_status.state_object["lift_status"] != LiftState.UP:
+    elif lift_status.state_object["lift_state"] != LiftState.UP:
         lift_boat()
 
 
 def down_button_callback():
     if lift_is_in_sequence():
         abort()
-    elif lift_status.state_object["lift_status"] != LiftState.DOWN:
+    elif lift_status.state_object["lift_state"] != LiftState.DOWN:
         lower_boat()
 
 
