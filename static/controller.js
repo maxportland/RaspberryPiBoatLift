@@ -1,6 +1,12 @@
 var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http, $timeout) {
-
+    $scope.status = {
+        "lift_state": "",
+        "blower_state": "",
+        "master_valve_state": "",
+        "rear_valve_state": "",
+        "front_valve_state": ""
+    };
     var init = function () {
         $timeout(function() {
             $http({
