@@ -13,6 +13,10 @@
 	margin-top:10px;
 }
 
+.cursor-pointer {
+    cursor:pointer;
+}
+
 .btn-group-lg>.btn.boat-lift-button,
 .btn-lg.boat-lift-button {
 	border-radius:0;

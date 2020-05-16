@@ -35,56 +35,56 @@
         </div>
         <br/>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example text-center ng-cloak" ng-show='status.blower_state == "off"'>
-                <img src="{{ url_for('static', filename='indicator_off.png') }}" ng-click="blowerOn()"/>
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-show='status.blower_state == "off"' ng-click="blowerOn()">
+                <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
-                <img src="{{ url_for('static', filename='power_off.png') }}" ng-click="blowerOn()"/>
-                <div class="button-label" ng-click="blowerOn()>BLOWER</div>
+                <img src="{{ url_for('static', filename='power_off.png') }}"/>
+                <div class="button-label">BLOWER</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak" ng-show='status.blower_state == "on"'>
-                <img src="{{ url_for('static', filename='indicator_on.png') }}" ng-click="blowerOff()"/>
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-show='status.blower_state == "on"' ng-click="blowerOff()">
+                <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
-                <img src="{{ url_for('static', filename='power_on.png') }}" ng-click="blowerOff()"/>
-                <div class="button-label" ng-click="blowerOff()">BLOWER</div>
+                <img src="{{ url_for('static', filename='power_on.png') }}"/>
+                <div class="button-label">BLOWER</div>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.rear_valve_state == "closed"' ng-click="rearValvesOpen()">
                 <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
                 <img src="{{ url_for('static', filename='switch_down.png') }}"/>
                 <div class="button-label">REAR VALVES</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.rear_valve_state == "open"' ng-click="rearValvesClose()">
                 <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
                 <img src="{{ url_for('static', filename='switch_up.png') }}"/>
                 <div class="button-label">REAR VALVES</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.front_valve_state == "closed"' ng-click="frontValvesOpen()">
                 <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
                 <img src="{{ url_for('static', filename='switch_down.png') }}"/>
                 <div class="button-label">FRONT VALVES</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.front_valve_state == "open"' ng-click="frontValvesClose()">
                 <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
                 <img src="{{ url_for('static', filename='switch_up.png') }}"/>
                 <div class="button-label">FRONT VALVES</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.master_valve_state == "closed"' ng-click="masterValveOpen()">
                 <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
                 <img src="{{ url_for('static', filename='switch_down.png') }}"/>
                 <div class="button-label">MASTER VALVE</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak"
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
                  ng-show='status.master_valve_state == "open"' ng-click="masterValveClose()">
                 <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
