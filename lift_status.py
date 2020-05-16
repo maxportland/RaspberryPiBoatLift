@@ -4,7 +4,7 @@ from lift_state import LiftState, BlowerState, ValveState
 status_lcd = RPi_I2C_driver.lcd()
 
 state_object = {
-    "lift_state": LiftState.DOWN,
+    "lift_state": LiftState.UP,
     "blower_state": BlowerState.OFF,
     "master_valve_state": ValveState.CLOSED,
     "rear_valves": ValveState.CLOSED,
