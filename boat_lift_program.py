@@ -12,11 +12,13 @@ GPIO.setwarnings(False)
 
 SMALL_VALVE_TIMING = 4
 LARGE_VALVE_TIMING = 5
-LOWER_BACK_WAIT = 35
-LOWER_FRONT_WAIT = 25
-RAISE_FRONT_TIMING = 20
-RAISE_REAR_TIMING = 15
-RAISE_BOTH_TIMING = 20
+
+LOWER_BACK_WAIT = 96
+LOWER_FRONT_WAIT = 158
+
+RAISE_FRONT_TIMING = 32
+RAISE_REAR_TIMING = 30
+RAISE_BOTH_TIMING = 85
 
 class State(Enum):
     UP = 1
@@ -50,6 +52,9 @@ ALL_VALVES = FRONT_VALVES + REAR_VALVES
 BUTTONS = [UP_BUTTON, DOWN_BUTTON]
 
 state = State.DOWN
+
+state_object = {
+}
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(ALL_VALVES + VALVE_POWER + [BLOWER, MASTER_VALVE], GPIO.OUT, initial=GPIO.HIGH)
@@ -174,12 +179,12 @@ def index():
 
 @app.route("/down", methods = ['POST'])
 def webDownPush():
-    up_button_callback()
+    down_button_callback()
     return "accepted"
  
 @app.route("/up", methods = ['POST'])
 def webUpPush():
-    down_button_callback()
+    up_button_callback()
     return "accepted"
 
 @app.route("/frontValvesOpen", methods = ['POST'])
