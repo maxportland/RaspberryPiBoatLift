@@ -2,7 +2,6 @@ var app = angular.module('liftApp', []);
 app.controller('boatLiftController', function($scope, $http, $timeout) {
     var init = function () {
     $timeout(function() {
-            alert("Hello!");
             $http({
                 url: '/status',
                 method: "GET",
