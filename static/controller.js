@@ -82,15 +82,15 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     $scope.masterValveOpen = function() {
 
         // Frame size: 30px
-        $(".switch-slide").css("background-image", "url('switch_sprite2.png')");
+        $("#master-valve-switch").css("background-image", "url('switch_sprite2.png')");
         var size = 30;
         var frame = 0;
         var interval = setInterval(function() {
-            $(".switch-slide").css('background-position', frame * size + 'px 0px');
+            $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
             frame++;
             if (frame == 11){
                 clearInterval(interval);
-                 $(".switch-slide").css("background-image", "url('switch_up.png')");
+                 $("#master-valve-switch").css("background-image", "url('switch_up.png')");
             }
         }, 273);
 

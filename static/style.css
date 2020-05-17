@@ -48,7 +48,7 @@
 
 .ng-cloak { display: none !important; }
 
-.switch-slide {
+#master-valve-switch {
     height: 56px;
     width: 30px;
     background-image: url(switch_sprite2.png);
