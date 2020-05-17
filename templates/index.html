@@ -50,7 +50,7 @@
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
 
-            <div ng-repeat='valve in valves' class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleValve($event, valve.state, valve.url)">
+            <div ng-repeat="valve in valves" class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleValve($event, valve.state, valve.url)">
                 <img ng-show='status[valve.state] == "closed"' src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <img ng-show='status[valve.state] == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
