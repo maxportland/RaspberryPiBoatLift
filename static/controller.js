@@ -80,7 +80,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         });
     };
     $scope.toggleMasterValve = function() {
-        var switch = $( this ).children( '.switch' );
+        var switch = $( this ).children( ".switch" );
         if($scope.status.master_valve_state == "open") {
             var size = 30;
             var frame = 0;
