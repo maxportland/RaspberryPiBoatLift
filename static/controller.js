@@ -95,7 +95,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             }
         }, 273);
 
-
         $http({
             url: '/masterValveOpen',
             method: "POST",
@@ -108,6 +107,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     $scope.masterValveClose = function() {
 
         $("#master-valve-switch-open").css("background-image", "url('static/switch_sprite2.png')");
+        $("#master-valve-switch-closed").css('background-position', '-300px 0px');
         var size = 30;
         var frame = -10;
         var interval = setInterval(function() {
