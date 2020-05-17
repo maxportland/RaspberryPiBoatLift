@@ -55,9 +55,9 @@
 }
 
 .switch-off {
-    background-position:-360px 0px;
+    background-position: 0px 0px;
 }
 
 .switch-on {
-    background-position:-360px 0px;
+    background-position: -360px 0px;
 }
