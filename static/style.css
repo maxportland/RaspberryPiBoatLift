@@ -61,3 +61,33 @@
 .switch-on {
     background-position: -360px 0px;
 }
+
+.indicator {
+    height: 33px;
+    width: 33px;
+    display: inline-block;
+    background-image: url(indicator.png);
+}
+
+.indicator-off {
+    background-position: 0px 0px;
+}
+
+.indicator-on {
+    background-position: -33px 0px;
+}
+
+.power-button {
+    height: 43px;
+    width: 43px;
+    display: inline-block;
+    background-image: url(power_button.png);
+}
+
+.power-button-off {
+    background-position: 0px 0px;
+}
+
+.power-button-on {
+    background-position: -43px 0px;
+}
