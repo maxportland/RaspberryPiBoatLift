@@ -88,7 +88,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         var interval = setInterval(function() {
             $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
             frame--;
-            if (frame == -11) {
+            if (frame == -10) {
                 clearInterval(interval);
                 $("#master-valve-switch").css('background-position', '0px 0px');
                 $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
@@ -106,6 +106,20 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         });
     };
     $scope.masterValveClose = function() {
+
+        $("#master-valve-switch").css("background-image", "url('static/switch_sprite2.png')");
+        var size = 30;
+        var frame = 10;
+        var interval = setInterval(function() {
+            $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
+            frame--;
+            if (frame == 0) {
+                clearInterval(interval);
+                $("#master-valve-switch").css('background-position', '0px 0px');
+                $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
+            }
+        }, 273);
+
         $http({
             url: '/masterValveClose',
             method: "POST",
