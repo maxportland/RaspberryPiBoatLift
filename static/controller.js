@@ -89,7 +89,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame--;
                 if (frame == -12) {
                     clearInterval(interval);
-                    $( element ).removeAttr("style");
                 }
             }, 273);
             $http({
@@ -99,6 +98,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
                 $scope.status = result.data;
+                $( element ).removeAttr("style");
             });
         } else if($scope.status.master_valve_state == "open") {
             var size = 30;
@@ -108,7 +108,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame++;
                 if (frame == -1) {
                     clearInterval(interval);
-                    $( element ).removeAttr("style");
                 }
             }, 273);
             $http({
@@ -118,6 +117,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
                 $scope.status = result.data;
+                $( element ).removeAttr("style");
             });
         }
 
