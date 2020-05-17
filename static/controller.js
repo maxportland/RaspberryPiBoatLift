@@ -93,7 +93,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 $("#master-valve-switch-closed").css('background-position', '0px 0px');
                 $("#master-valve-switch-closed").css("background-image", "url('static/switch_up.png')");
             }
-        }, 273);
+        }, 240);
 
 
         $http({
