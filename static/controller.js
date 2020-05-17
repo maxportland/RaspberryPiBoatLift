@@ -100,11 +100,10 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 $scope.status = result.data;
             });
         } else if($scope.status.master_valve_state == "closed") {
-            $( element ).css('background-position', '-300px 0px');
             var size = 30;
             var frame = -10;
             var interval = setInterval(function() {
-                element.css('background-position', frame * size + 'px 0px');
+                $( element ).css('background-position', frame * size + 'px 0px');
                 frame++;
                 if (frame == 0) {
                     clearInterval(interval);
