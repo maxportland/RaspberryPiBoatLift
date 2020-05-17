@@ -87,7 +87,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         var frame = 0;
         var interval = setInterval(function() {
             $("#master-valve-switch-closed").css('background-position', frame * size + 'px 0px');
-            frame++;
+            frame--;
             if (frame == -10) {
                 clearInterval(interval);
                 $("#master-valve-switch-closed").css('background-position', '0px 0px');
@@ -109,10 +109,10 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
 
         $("#master-valve-switch-open").css("background-image", "url('static/switch_sprite2.png')");
         var size = 30;
-        var frame = 10;
+        var frame = -10;
         var interval = setInterval(function() {
             $("#master-valve-switch-open").css('background-position', frame * size + 'px 0px');
-            frame--;
+            frame++;
             if (frame == 0) {
                 clearInterval(interval);
                 $("#master-valve-switch-open").css('background-position', '0px 0px');
