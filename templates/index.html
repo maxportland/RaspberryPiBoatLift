@@ -49,41 +49,14 @@
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
-                 ng-show='status.rear_valve_state == "closed"' ng-click="rearValvesOpen()">
-                <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
+
+            <div ng-repeat='valve in valves' class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleValve($event, valve.state, valve.url)">
+                <img ng-show='status[valve.state] == "closed"' src="{{ url_for('static', filename='indicator_off.png') }}"/>
+                <img ng-show='status[valve.state] == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
-                <img src="{{ url_for('static', filename='switch_down.png') }}"/>
-                <div class="button-label">REAR VALVES</div>
-            </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
-                 ng-show='status.rear_valve_state == "open"' ng-click="rearValvesClose()">
-                <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
-                <br/>
-                <img src="{{ url_for('static', filename='switch_up.png') }}"/>
-                <div class="button-label">REAR VALVES</div>
-            </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
-                 ng-show='status.front_valve_state == "closed"' ng-click="frontValvesOpen()">
-                <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
-                <br/>
-                <img src="{{ url_for('static', filename='switch_down.png') }}"/>
-                <div class="button-label">FRONT VALVES</div>
-            </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
-                 ng-show='status.front_valve_state == "open"' ng-click="frontValvesClose()">
-                <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
-                <br/>
-                <img src="{{ url_for('static', filename='switch_up.png') }}"/>
-                <div class="button-label">FRONT VALVES</div>
-            </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleMasterValve($event)">
-                <img ng-show='status.master_valve_state == "closed"' src="{{ url_for('static', filename='indicator_off.png') }}"/>
-                <img ng-show='status.master_valve_state == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
-                <br/>
-                <div class="switch switch-slide" ng-class="{'switch-on': status.master_valve_state == 'open',
-                'switch-off': status.master_valve_state == 'closed'}"></div>
-                <div class="button-label">MASTER VALVE</div>
+                <div class="switch switch-slide" ng-class="{'switch-on': status[valve.state] == 'open',
+                'switch-off': status[valve.state] == 'closed'}"></div>
+                <div class="button-label" > {{valve.name}}</div>
             </div>
         </div>
     </div>

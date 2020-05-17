@@ -7,6 +7,11 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         "rear_valve_state": "",
         "front_valve_state": ""
     };
+    $scope.valves = [
+        {state:'master_valve_state', url: '/masterValve', name:'MASTER VALVE'},
+        {state:'front_valve_state', url: '/frontValve', name:'FRONT VALVE'},
+        {state:'rear_valve_state', url: '/rearValve', name:'REAR VALVE'}
+    ];
     var init = function () {
         $timeout(function() {
             $http({
@@ -79,9 +84,10 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             $scope.status = result.data;
         });
     };
-    $scope.toggleMasterValve = function(event) {
+    $scope.toggleValve = function(event, valve_state, valve_url) {
         var element = angular.element( event.currentTarget ).children( ".switch" )[0];
-        if($scope.status.master_valve_state == "closed") {
+
+        if($scope.status[ valve_state ] == "closed") {
             var size = 30;
             var frame = -1;
             var interval = setInterval(function() {
@@ -92,7 +98,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 }
             }, 273);
             $http({
-                url: '/masterValveOpen',
+                url: valve_url + 'Open',
                 method: "POST",
                 data: {},
                 headers: {'Content-Type': 'application/json'}
@@ -100,7 +106,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 $scope.status = result.data;
                 $( element ).removeAttr("style");
             });
-        } else if($scope.status.master_valve_state == "open") {
+        } else if($scope.status[ valve_state ] == "open") {
             var size = 30;
             var frame = -12;
             var interval = setInterval(function() {
@@ -111,7 +117,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 }
             }, 273);
             $http({
-                url: '/masterValveClose',
+                url: valve_url + 'Close',
                 method: "POST",
                 data: {},
                 headers: {'Content-Type': 'application/json'}
