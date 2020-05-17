@@ -48,8 +48,15 @@
 
 .ng-cloak { display: none !important; }
 
-#master-valve-switch {
+#master-valve-switch-closed {
     height: 56px;
     width: 30px;
     background-image: url(switch_down.png);
 }
+
+#master-valve-switch-open {
+    height: 56px;
+    width: 30px;
+    background-image: url(switch_up.png);
+}
+

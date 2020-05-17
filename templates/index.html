@@ -81,7 +81,7 @@
                  ng-show='status.master_valve_state == "closed"' ng-click="masterValveOpen()">
                 <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
-                <div id="master-valve-switch" class="switch-slide">
+                <div id="master-valve-switch-closed" class="switch-slide">
                 </div>
                 <div class="button-label">MASTER VALVE</div>
             </div>
@@ -89,7 +89,7 @@
                  ng-show='status.master_valve_state == "open"' ng-click="masterValveClose()">
                 <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
-                <img src="{{ url_for('static', filename='switch_up.png') }}"/>
+                <div id="master-valve-switch-open" class="switch-slide">
                 <div class="button-label">MASTER VALVE</div>
             </div>
         </div>

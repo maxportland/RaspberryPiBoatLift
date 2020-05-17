@@ -82,16 +82,16 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     $scope.masterValveOpen = function() {
 
         // Frame size: 30px
-        $("#master-valve-switch").css("background-image", "url('static/switch_sprite2.png')");
+        $("#master-valve-switch-closed").css("background-image", "url('static/switch_sprite2.png')");
         var size = 30;
         var frame = 0;
         var interval = setInterval(function() {
-            $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
+            $("#master-valve-switch-closed").css('background-position', frame * size + 'px 0px');
             frame--;
             if (frame == -10) {
                 clearInterval(interval);
-                $("#master-valve-switch").css('background-position', '0px 0px');
-                $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
+                $("#master-valve-switch-closed").css('background-position', '0px 0px');
+                $("#master-valve-switch-closed").css("background-image", "url('static/switch_up.png')");
             }
         }, 273);
 
@@ -107,16 +107,16 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     };
     $scope.masterValveClose = function() {
 
-        $("#master-valve-switch").css("background-image", "url('static/switch_sprite2.png')");
+        $("#master-valve-switch-open").css("background-image", "url('static/switch_sprite2.png')");
         var size = 30;
         var frame = 10;
         var interval = setInterval(function() {
-            $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
+            $("#master-valve-switch-open").css('background-position', frame * size + 'px 0px');
             frame--;
             if (frame == 0) {
                 clearInterval(interval);
-                $("#master-valve-switch").css('background-position', '0px 0px');
-                $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
+                $("#master-valve-switch-open").css('background-position', '0px 0px');
+                $("#master-valve-switch-open").css("background-image", "url('static/switch_up.png')");
             }
         }, 273);
 
