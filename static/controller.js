@@ -79,55 +79,49 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             $scope.status = result.data;
         });
     };
-    $scope.masterValveOpen = function() {
+    $scope.toggleMasterValve = function() {
+        var switch = $( this ).children( '.switch' );
+        if($scope.status.master_valve_state == "open") {
+            var size = 30;
+            var frame = 0;
+            var interval = setInterval(function() {
+                switch.css('background-position', frame * size + 'px 0px');
+                frame--;
+                if (frame == -10) {
+                    clearInterval(interval);
+                    switch.css('background-position', '0px 0px');
+                }
+            }, 273);
+            $http({
+                url: '/masterValveClose',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        } elseif($scope.status.master_valve_state == "closed") {
+            switch.css('background-position', '-300px 0px');
+            var size = 30;
+            var frame = -10;
+            var interval = setInterval(function() {
+                switch.css('background-position', frame * size + 'px 0px');
+                frame++;
+                if (frame == 0) {
+                    clearInterval(interval);
+                    switch.css('background-position', '0px 0px');
+                }
+            }, 273);
+            $http({
+                url: '/masterValveOpen',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        }
 
-        // Frame size: 30px
-        $("#master-valve-switch-closed").css("background-image", "url('static/switch_sprite2.png')");
-        var size = 30;
-        var frame = 0;
-        var interval = setInterval(function() {
-            $("#master-valve-switch-closed").css('background-position', frame * size + 'px 0px');
-            frame--;
-            if (frame == -10) {
-                clearInterval(interval);
-                $("#master-valve-switch-closed").css('background-position', '0px 0px');
-                $("#master-valve-switch-closed").css("background-image", "url('static/switch_up.png')");
-            }
-        }, 273);
-
-        $http({
-            url: '/masterValveOpen',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.masterValveClose = function() {
-
-        $("#master-valve-switch-open").css("background-image", "url('static/switch_sprite2.png')");
-        $("#master-valve-switch-closed").css('background-position', '-300px 0px');
-        var size = 30;
-        var frame = -10;
-        var interval = setInterval(function() {
-            $("#master-valve-switch-open").css('background-position', frame * size + 'px 0px');
-            frame++;
-            if (frame == 0) {
-                clearInterval(interval);
-                $("#master-valve-switch-open").css('background-position', '0px 0px');
-                $("#master-valve-switch-open").css("background-image", "url('static/switch_down.png')");
-            }
-        }, 273);
-
-        $http({
-            url: '/masterValveClose',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
     };
     $scope.blowerOn = function() {
         $http({

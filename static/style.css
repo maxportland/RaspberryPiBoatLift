@@ -47,17 +47,17 @@
 
 .ng-cloak { display: none !important; }
 
-#master-valve-switch-closed {
+.switch {
     height: 56px;
     width: 30px;
     display: inline-block;
-    background-image: url(switch_down.png);
+    background-image: url(switch_sprite.png);
 }
 
-#master-valve-switch-open {
-    height: 56px;
-    width: 30px;
-    display: inline-block;
-    background-image: url(switch_up.png);
+.switch-off {
+    background-position:0px 0px;
 }
 
+.switch-on {
+    background-position:-360px 0px;
+}
