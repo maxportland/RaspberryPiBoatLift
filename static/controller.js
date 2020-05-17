@@ -84,7 +84,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             var size = 30;
             var frame = 0;
             var interval = setInterval(function() {
-                $( event.target ).children( ".switch" ).css('background-position', frame * size + 'px 0px');
+                $( event.srcElement ).children( ".switch" )[0].css('background-position', frame * size + 'px 0px');
                 frame--;
                 if (frame == -10) {
                     clearInterval(interval);
@@ -103,7 +103,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             var size = 30;
             var frame = -10;
             var interval = setInterval(function() {
-                $( event.target ).children( ".switch" ).css('background-position', frame * size + 'px 0px');
+                $( event.srcElement ).children( ".switch" )[0].css('background-position', frame * size + 'px 0px');
                 frame++;
                 if (frame == 0) {
                     clearInterval(interval);
