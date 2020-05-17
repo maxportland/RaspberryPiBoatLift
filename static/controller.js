@@ -83,7 +83,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         var element = angular.element( event.currentTarget ).children( ".switch" )[0];
         if($scope.status.master_valve_state == "closed") {
             var size = 30;
-            var frame = 1;
+            var frame = -1;
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame--;
@@ -105,7 +105,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame++;
-                if (frame == 1) {
+                if (frame == -1) {
                     clearInterval(interval);
                 }
             }, 273);
