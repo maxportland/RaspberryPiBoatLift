@@ -100,7 +100,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             }).then(function (result) {
                 $scope.status = result.data;
             });
-        } elseif($scope.status.master_valve_state == "closed") {
+        } else if($scope.status.master_valve_state == "closed") {
             toggle_switch.css('background-position', '-300px 0px');
             var size = 30;
             var frame = -10;
