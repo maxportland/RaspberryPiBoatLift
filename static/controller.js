@@ -8,9 +8,9 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         "front_valve_state": ""
     };
     $scope.valves = [
-        {state: 'master_valve_state', url: '/masterValve', name: 'MASTER VALVE'},
-        {state: 'front_valve_state', url: '/frontValve', name: 'FRONT VALVE'},
-        {state: 'rear_valve_state', url: '/rearValve', name: 'REAR VALVE'}
+        {'state': 'rear_valve_state', 'url': '/rearValve', 'name': 'REAR VALVE'},
+        {'state': 'front_valve_state', 'url': '/frontValve', 'name': 'FRONT VALVE'},
+        {'state': 'master_valve_state', 'url': '/masterValve', 'name': 'MASTER VALVE'}
     ];
     var init = function () {
         $timeout(function() {
@@ -37,46 +37,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     $scope.downPushed = function() {
         $http({
             url: '/down',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.frontValvesOpen = function() {
-        $http({
-            url: '/frontValvesOpen',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.frontValvesClose = function() {
-        $http({
-            url: '/frontValvesClose',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.rearValvesOpen = function() {
-        $http({
-            url: '/rearValvesOpen',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.rearValvesClose = function() {
-        $http({
-            url: '/rearValvesClose',
             method: "POST",
             data: {},
             headers: {'Content-Type': 'application/json'}
