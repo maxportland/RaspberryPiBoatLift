@@ -87,10 +87,11 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         var frame = 0;
         var interval = setInterval(function() {
             $("#master-valve-switch").css('background-position', frame * size + 'px 0px');
-            frame++;
-            if (frame == 11){
+            frame--;
+            if (frame == -11) {
                 clearInterval(interval);
-                 $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
+                $("#master-valve-switch").css('background-position', '0px 0px');
+                $("#master-valve-switch").css("background-image", "url('static/switch_up.png')");
             }
         }, 273);
 
