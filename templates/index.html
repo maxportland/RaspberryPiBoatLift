@@ -81,7 +81,8 @@
                  ng-show='status.master_valve_state == "closed"' ng-click="masterValveOpen()">
                 <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <br/>
-                <img id="master-valve-switch" class="switch-slide" src="{{ url_for('static', filename='switch_down.png') }}"/>
+                <div id="master-valve-switch" class="switch-slide">
+                </div>
                 <div class="button-label">MASTER VALVE</div>
             </div>
             <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer"
