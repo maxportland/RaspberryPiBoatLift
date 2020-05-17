@@ -89,6 +89,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame--;
                 if (frame == -11) {
                     clearInterval(interval);
+                    $( element ).css('');
                 }
             }, 273);
             $http({
@@ -107,6 +108,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame++;
                 if (frame == -1) {
                     clearInterval(interval);
+                    $( element ).css('');
                 }
             }, 273);
             $http({
