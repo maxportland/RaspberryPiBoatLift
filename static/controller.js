@@ -80,7 +80,21 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         });
     };
     $scope.masterValveOpen = function() {
-        $(".switch-slide").animateSprite('play', 'walkRight');
+
+        // Frame size: 30px
+        $(".switch-slide").css("background-image", "url('switch_sprite2.png')");
+        var size = 30;
+        var frame = 0;
+        var interval = setInterval(function() {
+            $(".switch-slide").css('background-position', frame * size + 'px 0px');
+            frame++;
+            if (frame == 11){
+                clearInterval(interval);
+                 $(".switch-slide").css("background-image", "url('switch_up.png')");
+            }
+        }, 273);
+
+
         $http({
             url: '/masterValveOpen',
             method: "POST",
@@ -122,16 +136,5 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     };
 });
 
-$(".switch-slide").animateSprite({
-                fps: 6,
-                animations: {
-                    walkRight: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-                    walkLeft: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-                },
-                loop: true,
-                complete: function(){
-
-                }
-            });
 
 
