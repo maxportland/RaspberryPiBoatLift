@@ -55,8 +55,8 @@
                 <img ng-show='status[value.state] == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
                 <div class="switch switch-slide" ng-class="{'switch-on': status[value.state] == 'open',
-                'switch-off': status[vauve.state] == 'closed'}"></div>
-                <div class="button-label" ng-bind-html="VALVE {{value.state}}"></div>
+                'switch-off': status[value.state] == 'closed'}"></div>
+                <div class="button-label" ng-bind-html=value.state"></div>
             </div>
         </div>
     </div>
