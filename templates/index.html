@@ -79,7 +79,7 @@
             </div>
             <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleMasterValve()">
                 <img ng-show='status.master_valve_state == "closed"' src="{{ url_for('static', filename='indicator_off.png') }}"/>
-                <img ng-show='status.master_valve_state == "open"' src="{{ url_for('static', filename='on.png') }}"/>
+                <img ng-show='status.master_valve_state == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
                 <div class="switch switch-slide" ng-class="{'switch-on': status.master_valve_state == 'on',
                 'switch-off': status.master_valve_state == 'off'}"></div>
