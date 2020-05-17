@@ -79,8 +79,8 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             $scope.status = result.data;
         });
     };
-    $scope.toggleMasterValve = function() {
-        var toggle_switch = $( this ).children( ".switch" );
+    $scope.toggleMasterValve = function(event) {
+        var toggle_switch = $( event.target ).children( ".switch" );
         if($scope.status.master_valve_state == "open") {
             var size = 30;
             var frame = 0;
@@ -89,7 +89,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame--;
                 if (frame == -10) {
                     clearInterval(interval);
-                    toggle_switch.css('background-position', '0px 0px');
                 }
             }, 273);
             $http({
@@ -109,7 +108,6 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 frame++;
                 if (frame == 0) {
                     clearInterval(interval);
-                    toggle_switch.css('background-position', '0px 0px');
                 }
             }, 273);
             $http({

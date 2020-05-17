@@ -77,7 +77,7 @@
                 <img src="{{ url_for('static', filename='switch_up.png') }}"/>
                 <div class="button-label">FRONT VALVES</div>
             </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleMasterValve()">
+            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleMasterValve($event)">
                 <img ng-show='status.master_valve_state == "closed"' src="{{ url_for('static', filename='indicator_off.png') }}"/>
                 <img ng-show='status.master_valve_state == "open"' src="{{ url_for('static', filename='indicator_on.png') }}"/>
                 <br/>
