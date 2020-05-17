@@ -8,9 +8,9 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         "front_valve_state": ""
     };
     $scope.valves = [
-        {state:'master_valve_state', url: '/masterValve', name:'MASTER VALVE'},
-        {state:'front_valve_state', url: '/frontValve', name:'FRONT VALVE'},
-        {state:'rear_valve_state', url: '/rearValve', name:'REAR VALVE'}
+        {state: 'master_valve_state', url: '/masterValve', name: 'MASTER VALVE'},
+        {state: 'front_valve_state', url: '/frontValve', name: 'FRONT VALVE'},
+        {state: 'rear_valve_state', url: '/rearValve', name: 'REAR VALVE'}
     ];
     var init = function () {
         $timeout(function() {
