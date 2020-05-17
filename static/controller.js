@@ -81,36 +81,36 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     };
     $scope.toggleMasterValve = function(event) {
         var element = angular.element( event.currentTarget ).children( ".switch" )[0];
-        if($scope.status.master_valve_state == "open") {
+        if($scope.status.master_valve_state == "closed") {
             var size = 30;
-            var frame = 0;
+            var frame = 1;
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame--;
-                if (frame == -10) {
+                if (frame == -11) {
                     clearInterval(interval);
                 }
             }, 273);
             $http({
-                url: '/masterValveClose',
+                url: '/masterValveOpen',
                 method: "POST",
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
                 $scope.status = result.data;
             });
-        } else if($scope.status.master_valve_state == "closed") {
+        } else if($scope.status.master_valve_state == "open") {
             var size = 30;
-            var frame = -10;
+            var frame = -11;
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame++;
-                if (frame == 0) {
+                if (frame == 1) {
                     clearInterval(interval);
                 }
             }, 273);
             $http({
-                url: '/masterValveOpen',
+                url: '/masterValveClose',
                 method: "POST",
                 data: {},
                 headers: {'Content-Type': 'application/json'}
