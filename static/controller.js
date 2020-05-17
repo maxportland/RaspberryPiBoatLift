@@ -87,9 +87,9 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame--;
-                if (frame == -11) {
+                if (frame == -12) {
                     clearInterval(interval);
-                    $( element ).css('');
+                    $( element ).removeAttr("style");
                 }
             }, 273);
             $http({
@@ -102,13 +102,13 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
             });
         } else if($scope.status.master_valve_state == "open") {
             var size = 30;
-            var frame = -11;
+            var frame = -12;
             var interval = setInterval(function() {
                 $( element ).css('background-position', frame * size + 'px 0px');
                 frame++;
                 if (frame == -1) {
                     clearInterval(interval);
-                    $( element ).css('');
+                    $( element ).removeAttr("style");
                 }
             }, 273);
             $http({
