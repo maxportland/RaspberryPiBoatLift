@@ -80,16 +80,16 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         });
     };
     $scope.toggleMasterValve = function() {
-        var switch = $( this ).children( ".switch" );
+        var toggle_switch = $( this ).children( ".switch" );
         if($scope.status.master_valve_state == "open") {
             var size = 30;
             var frame = 0;
             var interval = setInterval(function() {
-                switch.css('background-position', frame * size + 'px 0px');
+                toggle_switch.css('background-position', frame * size + 'px 0px');
                 frame--;
                 if (frame == -10) {
                     clearInterval(interval);
-                    switch.css('background-position', '0px 0px');
+                    toggle_switch.css('background-position', '0px 0px');
                 }
             }, 273);
             $http({
@@ -101,15 +101,15 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 $scope.status = result.data;
             });
         } elseif($scope.status.master_valve_state == "closed") {
-            switch.css('background-position', '-300px 0px');
+            toggle_switch.css('background-position', '-300px 0px');
             var size = 30;
             var frame = -10;
             var interval = setInterval(function() {
-                switch.css('background-position', frame * size + 'px 0px');
+                toggle_switch.css('background-position', frame * size + 'px 0px');
                 frame++;
                 if (frame == 0) {
                     clearInterval(interval);
-                    switch.css('background-position', '0px 0px');
+                    toggle_switch.css('background-position', '0px 0px');
                 }
             }, 273);
             $http({
