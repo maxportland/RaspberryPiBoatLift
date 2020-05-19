@@ -2,8 +2,24 @@
   font-family: 'OpenSansExtraBold';
   src: url('fonts/OpenSans-ExtraBold.ttf')  format('truetype');
 }
+
+@font-face {
+  font-family: 'PTMono';
+  src: url('fonts/PTMono-Regular.ttf')  format('truetype');
+}
+
 .h2, .app-title {
 	font-family:"OpenSansExtraBold";
+}
+
+.lcd_screen {
+    width:313px;
+    height:112px;
+    background-image: url(lift_screen.png);
+    font-family:"PTMono";
+    color:#818181;
+    font-size:10px;
+    padding:20px 25px;
 }
 
 .button-label {
@@ -78,7 +94,7 @@
 }
 
 .power-button {
-    height: 43px;
+    height: 56px;
     width: 43px;
     display: inline-block;
     background-image: url(power_button.png);
@@ -90,4 +106,24 @@
 
 .power-button-on {
     background-position: -43px 0px;
+}
+
+.easy-lift-button {
+    height: 43px;
+    width: 139px;
+    display: inline-block;
+    background-image: url(easy_lift_button.png);
+    font-family:"OpenSansExtraBold";
+    color:#818181;
+    font-size:18px;
+    padding-top: 8px;
+    background-position: -139px 0px;
+}
+
+.easy-lift-button-pushed {
+    background-position: -139px 0px;
+}
+
+.easy-lift-button-not-pushed {
+    background-position: 0px 0px;
 }

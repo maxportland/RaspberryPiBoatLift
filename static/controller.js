@@ -24,25 +24,34 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
          }, 0);
     };
     init();
-    $scope.upPushed = function() {
-        $http({
-            url: '/up',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.downPushed = function() {
-        $http({
-            url: '/down',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
+    $scope.toggleEasyLift = function() {
+        var element = angular.element( event.currentTarget ).children( ".easy-lift-button" )[0];
+        $( element ).css('background-position', '0px 0px');
+        $( element ).css('padding-top', '7px');
+        var interval = setInterval(function() {
+            $( element ).css('background-position', '-139px 0px');
+            $( element ).css('padding-top', '8px');
+            clearInterval(interval);
+        }, 1000);
+        if($scope.status.lift_state == "down") {
+            $http({
+                url: '/up',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        } else if($scope.status.lift_state == "up") {
+            $http({
+                url: '/down',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        }
     };
     $scope.toggleValve = function(event, valve_state, valve_url) {
         var element = angular.element( event.currentTarget ).children( ".switch" )[0];
@@ -88,25 +97,26 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         }
 
     };
-    $scope.blowerOn = function() {
-        $http({
-            url: '/blowerOn',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
-    };
-    $scope.blowerOff = function() {
-        $http({
-            url: '/blowerOff',
-            method: "POST",
-            data: {},
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (result) {
-            $scope.status = result.data;
-        });
+    $scope.blowerToggle = function() {
+        if($scope.status.blower_state == "off") {
+            $http({
+                url: '/blowerOn',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        } else {
+            $http({
+                url: '/blowerOff',
+                method: "POST",
+                data: {},
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (result) {
+                $scope.status = result.data;
+            });
+        }
     };
 });
 

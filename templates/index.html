@@ -16,45 +16,38 @@
 <body>
 <div class="container" ng-controller="boatLiftController">
     <br/><br/>
-    <div class="jumbotron" style="background-color:#E6E6E5;border-radius:10px;">
-        <h1 class="app-title text-center" style="color:#818181;">EASY LIFT</h1>
-        <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example ng-cloak cursor-pointer" ng-show='status.lift_state == "down"' ng-click="upPushed()">
-                <img src="{{ url_for('static', filename='switch_down.png') }}"/>
-            </div>
-            <div class="p-2 bd-highlight col-example ng-cloak cursor-pointer" ng-show='status.lift_state == "up"' ng-click="downPushed()">
-                <img src="{{ url_for('static', filename='switch_up.png') }}"/>
+    <div class="jumbotron" style="background-color:#E6E6E5;border-radius:10px;border:1px solid #818181;">
+        <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleEasyLift($event)">
+            <div class="easy-lift-button">
+                EASY LIFT
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example ng-cloak" ng-show='status.rear_valve_state == "closed"'>
-                <div style="width:313px;height:112px;background-image:url({{ url_for('static', filename='lift_screen.png') }});">
-
+            <div class="p-2 bd-highlight col-example ng-cloak">
+                <div class="lcd_screen">
+                    BOAT: {{ ' {{ status.lift_state }} ' }}<br/>
+                    MASTER VALVE: {{ ' {{ status.master_valve_state }} ' }}<br/>
+                    FRONT VALVES: {{ ' {{ status.front_valve_state }} ' }}<br/>
+                    REAR VALVES: {{ ' {{ status.rear_valve_state }} ' }}<br/>
+                    BLOWER: {{ ' {{ status.blower_state }} ' }}
                 </div>
             </div>
         </div>
-        <br/>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-show='status.blower_state == "off"' ng-click="blowerOn()">
-                <img src="{{ url_for('static', filename='indicator_off.png') }}"/>
-                <br/>
-                <img src="{{ url_for('static', filename='power_off.png') }}"/>
-                <div class="button-label">BLOWER</div>
-            </div>
-            <div class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-show='status.blower_state == "on"' ng-click="blowerOff()">
-                <img src="{{ url_for('static', filename='indicator_on.png') }}"/>
-                <br/>
-                <img src="{{ url_for('static', filename='power_on.png') }}"/>
-                <div class="button-label">BLOWER</div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
-            <div ng-repeat="valve in valves" class="p-2 bd-highlight col-example text-center ng-cloak cursor-pointer" ng-click="toggleValve($event, valve.state, valve.url)">
-                <div class="indicator" ng-class="{'indicator-on': status[valve.state] == 'open', 'indicator-off': status[valve.state] == 'closed'}"/>
+            <div ng-repeat="valve in valves" class="p-2 text-center ng-cloak cursor-pointer" ng-click="toggleValve($event, valve.state, valve.url)">
+                <div class="indicator" ng-class="{'indicator-on': status[valve.state] == 'open', 'indicator-off': status[valve.state] == 'closed'}"></div>
                 <br/>
                 <div class="switch switch-slide" ng-class="{'switch-on': status[valve.state] == 'open',
                 'switch-off': status[valve.state] == 'closed'}"></div>
-                <div class="button-label"></div>
+                <div class="button-label">{{ '{{ valve.name }}' }}</div>
+            </div>
+            <div class="p-2 text-center ng-cloak cursor-pointer" ng-click="blowerToggle()">
+                <div class="indicator" ng-class="{'indicator-on': status.blower_state == 'on', 'indicator-off': status.blower_state == 'off'}"></div>
+                <br/>
+                <div class="power-button"
+                     ng-class="{'power-button-on': status.blower_state == 'on', 'power-button-off': status.blower_state == 'off'}">
+                </div>
+                <div class="button-label">BLOWER</div>
             </div>
         </div>
     </div>
