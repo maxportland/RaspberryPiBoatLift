@@ -22,68 +22,64 @@ def lift_is_in_sequence():
 
 
 def up_button_callback():
-    if lift_is_in_sequence():
-        abort()
-    elif state_object["lift_state"] != LiftState.UP:
+    if state_object["lift_state"] != LiftState.UP and not lift_is_in_sequence():
+        change_lift_state(LiftState.LIFTING)
         lift_boat()
 
 
 def down_button_callback():
-    if lift_is_in_sequence():
-        abort()
-    elif state_object["lift_state"] != LiftState.DOWN:
+    if state_object["lift_state"] != LiftState.DOWN and not lift_is_in_sequence():
+        change_lift_state(LiftState.LOWERING)
         lower_boat()
 
 
 def lower_sequence_started():
-    state_object["lift_state"] = LiftState.LOWERING
-    status_lcd.backlight(1)
+#    status_lcd.backlight(1)
     set_primary_status("--- LOWERING ---", "Lowering")
 
 
 def lower_sequence_ended():
-    state_object["lift_state"] = LiftState.DOWN
-    status_lcd.lcd_clear()
+    change_lift_state(LiftState.DOWN)
+#    status_lcd.lcd_clear()
     set_primary_status("-- BOAT  DOWN --", "Boat Down")
     set_secondary_status("       :)       ", "")
 
 
 def lift_sequence_started():
-    state_object["lift_state"] = LiftState.LIFTING
     status_lcd.backlight(1)
     set_primary_status("--- LIFTING ----", "Lifting")
 
 
 def lift_sequence_ended():
-    state_object["lift_state"] = LiftState.UP
+    change_lift_state(LiftState.UP)
     status_lcd.lcd_clear()
     set_primary_status("--- BOAT  UP ---", "Boat Up")
     set_secondary_status("       :)       ", "")
 
 
 def lower_rear_pause():
-    sleep(LOWER_REAR_WAIT)
+    loop_pause(LOWER_REAR_WAIT)
 
 
 def lower_front_pause():
-    sleep(LOWER_FRONT_WAIT)
+    loop_pause(LOWER_FRONT_WAIT)
 
 
 def lift_front_pause():
-    sleep(LIFT_FRONT_WAIT)
+    loop_pause(LIFT_FRONT_WAIT)
 
 
 def lift_rear_pause():
-    sleep(LIFT_REAR_WAIT)
+    loop_pause(LIFT_REAR_WAIT)
 
 
 def lift_both_pause():
-    sleep(LIFT_BOTH_WAIT)
+    loop_pause(LIFT_BOTH_WAIT)
 
 
 def lower_boat():
     sequence = (turn_off_blower, open_master_valve, open_rear_valves,
-                lower_rear_pause, open_front_valves, lower_front_pause())
+                lower_rear_pause, open_front_valves, lower_front_pause)
     lower_sequence_started()
     run_sequence(sequence)
     lower_sequence_ended()
@@ -105,6 +101,6 @@ def run_sequence(sequence):
 
 
 def abort():
-    state_object["lift_state"] = LiftState.ABORT
+    change_lift_state(LiftState.ABORT)
     close_all_valves()
     turn_off_blower()

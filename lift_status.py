@@ -1,7 +1,11 @@
 import RPi_I2C_driver
 from lift_state import LiftState, BlowerState, ValveState
+from app import socketio
+import json
+
 
 status_lcd = RPi_I2C_driver.lcd()
+
 
 state_object = {
     "lift_state": LiftState.UP,
@@ -14,13 +18,44 @@ state_object = {
 }
 
 
+def change_lift_state(lift_state):
+    state_object["lift_state"] = lift_state
+    broadcast_state_change()
+
+
+def change_blower_state(blower_state):
+    state_object["blower_state"] = blower_state
+    broadcast_state_change()
+
+
+def change_master_valve_state(master_valve_state):
+    state_object["master_valve_state"] = master_valve_state
+    broadcast_state_change()
+
+
+def change_rear_valve_state(rear_valve_state):
+    state_object["rear_valve_state"] = rear_valve_state
+    broadcast_state_change()
+
+
+def change_front_valve_state(front_valve_state):
+    state_object["front_valve_state"] = front_valve_state
+    broadcast_state_change()
+
+
+def broadcast_state_change():
+    socketio.emit('state_change', json.dumps(state_object))
+
+
 def set_primary_status(lcd_status_text, status_text):
     print(status_text)
     state_object["messages"].append(status_text)
-    status_lcd.lcd_display_string(lcd_status_text, 1)
+    broadcast_state_change()
+#    status_lcd.lcd_display_string(lcd_status_text, 1)
 
 
 def set_secondary_status(lcd_status_text, status_text):
     print(status_text)
     state_object["messages"].append(status_text)
-    status_lcd.lcd_display_string(lcd_status_text, 2)
+    broadcast_state_change()
+#    status_lcd.lcd_display_string(lcd_status_text, 2)

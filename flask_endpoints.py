@@ -1,9 +1,7 @@
-from flask import Flask, render_template
-import json
+from flask import render_template
 from control_sequences import *
 from lift_status import *
-
-app = Flask(__name__)
+from app import app
 
 
 @app.route("/")
@@ -73,4 +71,10 @@ def web_turn_on_blower():
 @app.route("/blowerOff", methods=['POST'])
 def web_turn_off_blower():
     turn_off_blower()
+    return json.dumps(state_object)
+
+
+@app.route("/abort", methods=['GET'])
+def web_abort():
+    abort()
     return json.dumps(state_object)

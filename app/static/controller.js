@@ -13,6 +13,9 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
         {'state': 'master_valve_state', 'url': '/masterValve', 'name': 'MASTER VALVE'}
     ];
     var init = function () {
+        $scope.socket = io().on('state_change', function(state) {
+            $scope.status = state;
+        });
         $timeout(function() {
             $http({
                 url: '/status',
@@ -25,14 +28,24 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     };
     init();
     $scope.toggleEasyLift = function() {
-        var element = angular.element( event.currentTarget ).children( ".easy-lift-button" )[0];
-        $( element ).css('background-position', '0px 0px');
-        $( element ).css('padding-top', '7px');
+        var lift_progress_element = angular.element("#lcd-screen-box .lift-progress");
+        var easy_lift_button_element = angular.element( event.currentTarget ).children( ".easy-lift-button" )[0];
+        $( easy_lift_button_element ).css('background-position', '0px 0px');
+        $( easy_lift_button_element ).css('padding-top', '7px');
         var interval = setInterval(function() {
-            $( element ).css('background-position', '-139px 0px');
-            $( element ).css('padding-top', '8px');
+            $( easy_lift_button_element ).css('background-position', '-139px 0px');
+            $( easy_lift_button_element ).css('padding-top', '8px');
             clearInterval(interval);
         }, 1000);
+        var progress_step = 0;
+        var progressInterval = setInterval(function() {
+            $( lift_progress_element ).css('background-position', '0px -'+ (progress_step * 16) +'px');
+            progress_step++;
+            if(progress_step > 25) {
+                $( lift_progress_element ).css('background-position', '0px 0px');
+                clearInterval(progressInterval);
+            }
+        }, 500);
         if($scope.status.lift_state == "down") {
             $http({
                 url: '/up',
