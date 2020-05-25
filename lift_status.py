@@ -2,9 +2,12 @@ import RPi_I2C_driver
 from lift_state import LiftState, BlowerState, ValveState
 from app import socketio
 import json
+import datetime
+import logging
 
 
 status_lcd = RPi_I2C_driver.lcd()
+logging.basicConfig(filename='lift.log', level=logging.INFO)
 
 
 state_object = {
@@ -65,7 +68,10 @@ class LiftStatus(object):
 
     @staticmethod
     def add_to_messages(message):
+        now = datetime.datetime.now()
         if len(state_object["messages"]) > 10:
             state_object["messages"].pop(0)
-        state_object["messages"].append(message)
+        logging.info(message)
+        message_with_date = now.strftime("[ %X %b %m ] - ") + message
+        state_object["messages"].append(message_with_date)
         LiftStatus.broadcast_state_change()
