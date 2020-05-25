@@ -32,9 +32,6 @@
                     BLOWER: {{ ' {{ status.blower_state }} ' }}
                 </div>
                 <div class="lift-progress"></div>
-                <div class="lift-messages">
-                    <div ng-repeat="message in status.messages | limitTo:-3 track by $index">{{ '{{message}}' }}</div>
-                </div>
             </div>
         </div>
         <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
@@ -52,6 +49,13 @@
                      ng-class="{'power-button-on': status.blower_state == 'on', 'power-button-off': status.blower_state == 'off'}">
                 </div>
                 <div class="button-label">BLOWER</div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center bd-highlight mb-3 example-parent">
+            <div class="p-2 lcd-screen-frame">
+                <div class="lift-messages">
+                    <div ng-repeat="message in status.messages | limitTo:-3 track by $index">{{ '{{message}}' }}</div>
+                </div>
             </div>
         </div>
     </div>
