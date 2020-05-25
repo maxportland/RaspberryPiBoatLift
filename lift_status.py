@@ -11,7 +11,7 @@ logging.basicConfig(filename='/home/pi/lift.log', level=logging.INFO)
 
 
 state_object = {
-    "updated": datetime.datetime.now().timestamp(),
+    "updated": datetime.datetime.now().isoformat(),
     "lift_state": LiftState.UP,
     "blower_state": BlowerState.OFF,
     "master_valve_state": ValveState.CLOSED,
@@ -55,7 +55,7 @@ class LiftStatus(object):
 
     @staticmethod
     def broadcast_state_change():
-        state_object['updated'] = datetime.datetime.now().timestamp()
+        state_object['updated'] = datetime.datetime.now().isoformat()
         socketio.emit('state_change', json.dumps(state_object))
 
     @staticmethod
