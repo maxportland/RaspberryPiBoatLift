@@ -7,7 +7,9 @@ import logging
 
 
 status_lcd = RPi_I2C_driver.lcd()
-logging.basicConfig(filename='/home/pi/lift.log', level=logging.INFO)
+logging.basicConfig(filename='/home/pi/lift.log',
+                    level=logging.INFO,
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 state_object = {
