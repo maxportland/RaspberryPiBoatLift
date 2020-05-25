@@ -47,24 +47,25 @@ class LiftStatus(object):
     @staticmethod
     def change_front_valve_state(front_valve_state):
         state_object["front_valve_state"] = front_valve_state
-        print("change_front_valve_state")
         LiftStatus.broadcast_state_change()
 
     @staticmethod
     def broadcast_state_change():
-        print("broadcast_state_change")
         socketio.emit('state_change', json.dumps(state_object))
 
     @staticmethod
     def set_primary_status(lcd_status_text, status_text):
-        print(status_text)
-        state_object["messages"].append(status_text)
-        LiftStatus.broadcast_state_change()
+        LiftStatus.add_to_messages(status_text)
         status_lcd.lcd_display_string(lcd_status_text, 1)
 
     @staticmethod
     def set_secondary_status(lcd_status_text, status_text):
-        print(status_text)
-        state_object["messages"].append(status_text)
-        LiftStatus.broadcast_state_change()
+        LiftStatus.add_to_messages(status_text)
         status_lcd.lcd_display_string(lcd_status_text, 2)
+
+    @staticmethod
+    def add_to_messages(message):
+        if len(state_object["messages"]) > 10:
+            state_object["messages"].pop(0)
+        state_object["messages"].append(message)
+        LiftStatus.broadcast_state_change()
