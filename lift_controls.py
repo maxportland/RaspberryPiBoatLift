@@ -41,35 +41,34 @@ class LiftControls(object):
     def open_rear_valves():
         GPIO.output(REAR_VALVE_POWER, False)
         GPIO.output(REAR_VALVES, False)
-        LiftStatus.set_secondary_status("REAR VALVES:OPEN", "Rear Valves Opened")
         sleep(SMALL_VALVE_TIMING)
         GPIO.output(REAR_VALVE_POWER, True)
         LiftStatus.change_rear_valve_state(ValveState.OPEN)
+        LiftStatus.set_secondary_status("REAR VALVES:OPEN", "Rear Valves Opened")
 
     @staticmethod
     def close_rear_valves():
         GPIO.output(REAR_VALVE_POWER, False)
         GPIO.output(REAR_VALVES, True)
-        LiftStatus.set_secondary_status("REAR VALVES:CLSE", "Rear Valves Closed")
         sleep(SMALL_VALVE_TIMING)
         GPIO.output(REAR_VALVE_POWER, True)
         LiftStatus.change_rear_valve_state(ValveState.CLOSED)
+        LiftStatus.set_secondary_status("REAR VALVES:CLSE", "Rear Valves Closed")
 
     @staticmethod
     def open_front_valves():
-        print("open_front_valves")
         GPIO.output(FRONT_VALVE_POWER, False)
         GPIO.output(FRONT_VALVES, False)
-        LiftStatus.set_secondary_status("FRNT VALVES:OPEN", "Front Valves Opened")
         sleep(SMALL_VALVE_TIMING)
         GPIO.output(FRONT_VALVE_POWER, True)
         LiftStatus.change_front_valve_state(ValveState.OPEN)
+        LiftStatus.set_secondary_status("FRNT VALVES:OPEN", "Front Valves Opened")
 
     @staticmethod
     def close_front_valves():
         GPIO.output(FRONT_VALVE_POWER, False)
         GPIO.output(FRONT_VALVES, True)
-        LiftStatus.set_secondary_status("FRNT VALVES:CLSE", "Front Valves Closed")
         sleep(SMALL_VALVE_TIMING)
         GPIO.output(FRONT_VALVE_POWER, True)
         LiftStatus.change_front_valve_state(ValveState.CLOSED)
+        LiftStatus.set_secondary_status("FRNT VALVES:CLSE", "Front Valves Closed")
