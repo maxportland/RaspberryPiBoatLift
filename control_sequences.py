@@ -4,7 +4,6 @@ from lift_status import LiftStatus, status_lcd
 from lift_state import *
 import RPi.GPIO as GPIO
 from time import sleep
-import time, os, sys, sched, threading
 
 
 class LiftSequences(object):
