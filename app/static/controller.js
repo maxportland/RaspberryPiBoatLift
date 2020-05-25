@@ -14,7 +14,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     ];
     var init = function () {
         $scope.socket = io().on('state_change', function(state) {
-            $scope.status["master_valve_state"] = state.master_valve_state;
+            $scope.status = JSON.parse(state);
             console.log($scope.status);
         });
         $timeout(function() {
