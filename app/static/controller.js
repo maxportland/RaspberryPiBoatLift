@@ -53,7 +53,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
             });
         } else if($scope.status.lift_state == "up") {
             $http({
@@ -62,7 +62,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
             });
         }
     };
@@ -85,7 +85,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
                 $( element ).removeAttr("style");
             });
         } else if($scope.status[ valve_state ] == "open") {
@@ -104,7 +104,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
                 $( element ).removeAttr("style");
             });
         }
@@ -118,7 +118,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
             });
         } else {
             $http({
@@ -127,7 +127,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 data: {},
                 headers: {'Content-Type': 'application/json'}
             }).then(function (result) {
-                $scope.status = result.data;
+                //$scope.status = result.data;
             });
         }
     };
