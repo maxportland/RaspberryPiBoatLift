@@ -19,13 +19,13 @@
     <div class="jumbotron" style="background-color:#E6E6E5;border-radius:10px;border:1px solid #818181;">
         <div class="p-2 text-center ng-cloak cursor-pointer" ng-click="toggleEasyLift($event)">
             <div class="easy-lift-button">
-                EASY LIFT
+                EASY-LIFT
             </div>
         </div>
         <div id="lcd-screen-box" class="d-flex justify-content-center bd-highlight mb-3 example-parent">
             <div class="p-2 lcd-screen-frame">
                 <div class="lcd-screen">
-                    BOAT: {{ ' {{ status.lift_state }} ' }}<br/>
+                    EASY-LIFT STATE: {{ ' {{ status.lift_state }} ' }}<br/>
                     MASTER VALVE: {{ ' {{ status.master_valve_state }} ' }}<br/>
                     FRONT VALVES: {{ ' {{ status.front_valve_state }} ' }}<br/>
                     REAR VALVES: {{ ' {{ status.rear_valve_state }} ' }}<br/>
