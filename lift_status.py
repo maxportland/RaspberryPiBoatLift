@@ -47,11 +47,12 @@ class LiftStatus(object):
     @staticmethod
     def change_front_valve_state(front_valve_state):
         state_object["front_valve_state"] = front_valve_state
+        print("change_front_valve_state")
         LiftStatus.broadcast_state_change()
 
     @staticmethod
     def broadcast_state_change():
-        print("- Broadcasting state change -")
+        print("broadcast_state_change")
         socketio.emit('state_change', json.dumps(state_object))
 
     @staticmethod

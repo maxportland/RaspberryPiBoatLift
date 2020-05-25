@@ -32,6 +32,7 @@ def web_up_button_callback():
 
 @app.route("/frontValvesOpen", methods=['POST'])
 def web_open_front_valves():
+    print("web_open_front_valves")
     thread = threading.Thread(target=LiftControls.open_front_valves)
     thread.start()
     return json.dumps(state_object)

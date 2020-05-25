@@ -57,6 +57,7 @@ class LiftControls(object):
 
     @staticmethod
     def open_front_valves():
+        print("open_front_valves")
         GPIO.output(FRONT_VALVE_POWER, False)
         GPIO.output(FRONT_VALVES, False)
         LiftStatus.set_secondary_status("FRNT VALVES:OPEN", "Front Valves Opened")
