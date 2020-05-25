@@ -3,7 +3,7 @@ from lift_controls import LiftControls
 from control_sequences import LiftSequences
 from lift_status import *
 from app import app
-import threading
+import os
 
 
 @app.route("/")
@@ -81,3 +81,9 @@ def web_turn_off_blower():
 def web_abort():
     socketio.start_background_task(target=LiftSequences.abort)
     return json.dumps(state_object)
+
+
+@app.route("/reboot", methods=['GET'])
+def web_reboot():
+    os.system("sudo reboot")
+    return "Rebooting"
