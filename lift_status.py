@@ -51,6 +51,7 @@ class LiftStatus(object):
 
     @staticmethod
     def broadcast_state_change():
+        print("- Broadcasting state change -")
         socketio.emit('state_change', json.dumps(state_object))
 
     @staticmethod
