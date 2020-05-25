@@ -3,14 +3,16 @@ from lift_state import LiftState, BlowerState, ValveState
 from app import socketio
 import json
 import datetime
+import time
 import logging
 
 
 status_lcd = RPi_I2C_driver.lcd()
-logging.basicConfig(filename='lift.log', level=logging.INFO)
+logging.basicConfig(filename='/home/pi/lift.log', level=logging.INFO)
 
 
 state_object = {
+    "updated": time.localtime(),
     "lift_state": LiftState.UP,
     "blower_state": BlowerState.OFF,
     "master_valve_state": ValveState.CLOSED,
@@ -54,6 +56,7 @@ class LiftStatus(object):
 
     @staticmethod
     def broadcast_state_change():
+        state_object['updated'] = time.localtime()
         socketio.emit('state_change', json.dumps(state_object))
 
     @staticmethod
