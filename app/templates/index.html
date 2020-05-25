@@ -56,7 +56,9 @@
                 <div class="lcd-screen">
                     <div class="lift-messages">
                         <div style="font-weight:bold;">LAST 4 LOG MESSAGES:</div>
-                        <div ng-repeat="message in status.messages | limitTo:-4 track by $index">{{ '{{message}}' }}</div>
+                        <ul>
+                            <li ng-repeat="message in status.messages | limitTo:-4 track by $index">{{ '{{message}}' }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
