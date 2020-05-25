@@ -78,7 +78,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 if (frame == -12) {
                     clearInterval(interval);
                 }
-            }, 273);
+            }, 50);
             $http({
                 url: valve_url + 'Open',
                 method: "POST",
@@ -97,7 +97,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
                 if (frame == -1) {
                     clearInterval(interval);
                 }
-            }, 273);
+            }, 50);
             $http({
                 url: valve_url + 'Close',
                 method: "POST",

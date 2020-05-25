@@ -1,106 +1,119 @@
-from lift_controls import *
+from lift_controls import LiftControls
+from setting_constants import *
+from lift_status import LiftStatus, status_lcd
+from lift_state import *
 import RPi.GPIO as GPIO
+from time import sleep
+import time, os, sys, sched, threading
 
 
-def close_all_valves():
-    close_master_valve()
-    close_rear_valves()
-    close_front_valves()
+class LiftSequences(object):
+    @staticmethod
+    def close_all_valves():
+        LiftControls.close_master_valve()
+        LiftControls.close_rear_valves()
+        LiftControls.close_front_valves()
 
+    @staticmethod
+    def init_sequence():
+        status_lcd.backlight(0)
+        GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=LiftSequences.up_button_callback, bouncetime=1000)
+        GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=LiftSequences.down_button_callback, bouncetime=1000)
+        LiftControls.turn_off_blower()
+        LiftSequences.close_all_valves()
 
-def init_sequence():
-    status_lcd.backlight(0)
-    GPIO.add_event_detect(UP_BUTTON, GPIO.FALLING, callback=up_button_callback, bouncetime=1000)
-    GPIO.add_event_detect(DOWN_BUTTON, GPIO.FALLING, callback=down_button_callback, bouncetime=1000)
-    turn_off_blower()
-    close_all_valves()
+    @staticmethod
+    def lift_is_in_sequence():
+        state_object = LiftStatus.get_state_object()
+        return (state_object["lift_state"] == LiftState.LIFTING or
+                state_object["lift_state"] == LiftState.LOWERING)
 
+    @staticmethod
+    def up_button_callback():
+        state_object = LiftStatus.get_state_object()
+        if state_object["lift_state"] != LiftState.UP and not LiftSequences.lift_is_in_sequence():
+            LiftStatus.change_lift_state(LiftState.LIFTING)
+            LiftSequences.lift_boat()
 
-def lift_is_in_sequence():
-    return (state_object["lift_state"] == LiftState.LIFTING or
-            state_object["lift_state"] == LiftState.LOWERING)
+    @staticmethod
+    def down_button_callback():
+        state_object = LiftStatus.get_state_object()
+        if state_object["lift_state"] != LiftState.DOWN and not LiftSequences.lift_is_in_sequence():
+            LiftStatus.change_lift_state(LiftState.LOWERING)
+            LiftSequences.lower_boat()
 
+    @staticmethod
+    def lower_sequence_started():
+        status_lcd.backlight(1)
+        LiftStatus.set_primary_status("--- LOWERING ---", "Lowering")
 
-def up_button_callback():
-    if state_object["lift_state"] != LiftState.UP and not lift_is_in_sequence():
-        change_lift_state(LiftState.LIFTING)
-        lift_boat()
+    @staticmethod
+    def lower_sequence_ended():
+        LiftStatus.change_lift_state(LiftState.DOWN)
+        status_lcd.lcd_clear()
+        LiftStatus.set_primary_status("-- BOAT  DOWN --", "Boat Down")
+        LiftStatus.set_secondary_status("       :)       ", "")
 
+    @staticmethod
+    def lift_sequence_started():
+        status_lcd.backlight(1)
+        LiftStatus.set_primary_status("--- LIFTING ----", "Lifting")
 
-def down_button_callback():
-    if state_object["lift_state"] != LiftState.DOWN and not lift_is_in_sequence():
-        change_lift_state(LiftState.LOWERING)
-        lower_boat()
+    @staticmethod
+    def lift_sequence_ended():
+        LiftStatus.change_lift_state(LiftState.UP)
+        status_lcd.lcd_clear()
+        LiftStatus.set_primary_status("--- BOAT  UP ---", "Boat Up")
+        LiftStatus.set_secondary_status("       :)       ", "")
 
+    @staticmethod
+    def lower_rear_pause():
+        sleep(LOWER_REAR_WAIT)
 
-def lower_sequence_started():
-#    status_lcd.backlight(1)
-    set_primary_status("--- LOWERING ---", "Lowering")
+    @staticmethod
+    def lower_front_pause():
+        sleep(LOWER_FRONT_WAIT)
 
+    @staticmethod
+    def lift_front_pause():
+        sleep(LIFT_FRONT_WAIT)
 
-def lower_sequence_ended():
-    change_lift_state(LiftState.DOWN)
-#    status_lcd.lcd_clear()
-    set_primary_status("-- BOAT  DOWN --", "Boat Down")
-    set_secondary_status("       :)       ", "")
+    @staticmethod
+    def lift_rear_pause():
+        sleep(LIFT_REAR_WAIT)
 
+    @staticmethod
+    def lift_both_pause():
+        sleep(LIFT_BOTH_WAIT)
 
-def lift_sequence_started():
-    status_lcd.backlight(1)
-    set_primary_status("--- LIFTING ----", "Lifting")
+    @staticmethod
+    def lower_boat():
+        sequence = (LiftSequences.turn_off_blower, LiftSequences.open_master_valve, LiftSequences.open_rear_valves,
+                    LiftSequences.lower_rear_pause, LiftSequences.open_front_valves, LiftSequences.lower_front_pause)
+        LiftSequences.lower_sequence_started()
+        LiftSequences.run_sequence(sequence)
+        LiftSequences.lower_sequence_ended()
 
+    @staticmethod
+    def lift_boat():
+        sequence = (LiftSequences.close_master_valve, LiftSequences.open_front_valves, LiftSequences.turn_on_blower,
+                    LiftSequences.lift_front_pause, LiftSequences.open_rear_valves, LiftSequences.lift_rear_pause,
+                    LiftSequences.close_front_valves, LiftSequences.lift_both_pause, LiftSequences.close_rear_valves,
+                    LiftSequences.turn_off_blower)
+        LiftSequences.lift_sequence_started()
+        LiftSequences.run_sequence(sequence)
+        LiftSequences.lift_sequence_ended()
 
-def lift_sequence_ended():
-    change_lift_state(LiftState.UP)
-    status_lcd.lcd_clear()
-    set_primary_status("--- BOAT  UP ---", "Boat Up")
-    set_secondary_status("       :)       ", "")
+    @staticmethod
+    def run_sequence(sequence):
+        for sequence_function in sequence:
+            state_object = LiftStatus.get_state_object()
+            if state_object["lift_state"] == LiftState.ABORT:
+                return
+            sequence_function()
 
-
-def lower_rear_pause():
-    loop_pause(LOWER_REAR_WAIT)
-
-
-def lower_front_pause():
-    loop_pause(LOWER_FRONT_WAIT)
-
-
-def lift_front_pause():
-    loop_pause(LIFT_FRONT_WAIT)
-
-
-def lift_rear_pause():
-    loop_pause(LIFT_REAR_WAIT)
-
-
-def lift_both_pause():
-    loop_pause(LIFT_BOTH_WAIT)
-
-
-def lower_boat():
-    sequence = (turn_off_blower, open_master_valve, open_rear_valves,
-                lower_rear_pause, open_front_valves, lower_front_pause)
-    lower_sequence_started()
-    run_sequence(sequence)
-    lower_sequence_ended()
-
-
-def lift_boat():
-    sequence = (close_master_valve, open_front_valves, turn_on_blower, lift_front_pause, open_rear_valves,
-                lift_rear_pause, close_front_valves, lift_both_pause, close_rear_valves, turn_off_blower)
-    lift_sequence_started()
-    run_sequence(sequence)
-    lift_sequence_ended()
-
-
-def run_sequence(sequence):
-    for sequence_function in sequence:
-        if state_object["lift_state"] == LiftState.ABORT:
-            return
-        sequence_function()
-
-
-def abort():
-    change_lift_state(LiftState.ABORT)
-    close_all_valves()
-    turn_off_blower()
+    @staticmethod
+    def abort():
+        LiftStatus.change_lift_state(LiftState.ABORT)
+        LiftSequences.close_all_valves()
+        LiftControls.turn_off_blower()
