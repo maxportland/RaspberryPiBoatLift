@@ -15,7 +15,7 @@ app.controller('boatLiftController', function($scope, $http, $timeout) {
     var init = function () {
         $scope.socket = io().on('state_change', function(state) {
             $scope.status = state;
-            console.log($scope.state);
+            console.log($scope.status);
         });
         $timeout(function() {
             $http({
